@@ -17,6 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     } 
     if (theme === "darkly") {
       import("bootswatch/dist/darkly/bootstrap.min.css");
+    } 
+    if (theme === "vapor,sketchy") {
+      import("bootswatch/dist/vapor/bootstrap.min.css");
+      import("bootswatch/dist/sketchy/bootstrap.min.css");
     }
     setLoaded(true);
   }, [loaded]);

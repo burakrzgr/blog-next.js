@@ -14,6 +14,7 @@ function ThemePicker({selected}:{selected:string}) {
       <Dropdown.Item onClick={() => setTheme("vapor")}>Vapor</Dropdown.Item>
       <Dropdown.Item onClick={() => setTheme("darkly")}>Darkly</Dropdown.Item>
       <Dropdown.Item onClick={() => setTheme("sketchy")}>Sketchy</Dropdown.Item>
+      <Dropdown.Item onClick={() => setTheme("vapor,sketchy")}>Vapor&Sketchy</Dropdown.Item>
     </DropdownButton>
   );
 }
