@@ -18,6 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (theme === "darkly") {
       import("bootswatch/dist/darkly/bootstrap.min.css");
     } 
+    if (theme === "simplex") {
+      import("bootswatch/dist/simplex/bootstrap.min.css");
+    } 
+    if (theme === "quartz") {
+      import("bootswatch/dist/quartz/bootstrap.min.css");
+    } 
     if (theme === "vapor,sketchy") {
       import("bootswatch/dist/sketchy/bootstrap.min.css");
       import("bootswatch/dist/vapor/bootstrap.min.css");
