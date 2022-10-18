@@ -9,7 +9,7 @@ export default function NewBlog(props:any) {
                     <Form.Control placeholder="Yeni Blog Başlığı" ></Form.Control>
                 </Card.Header>
                 <Card.Body>
-                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">İçerik</Card.Subtitle>
                     <Form.Control as="textarea" rows={15} placeholder="İşte aradığın fırsat, hadi ilginç birşeyler yaz..."></Form.Control>
                 </Card.Body>
                 <Card.Footer className="pb-3 ">
