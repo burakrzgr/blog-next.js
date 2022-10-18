@@ -15,7 +15,7 @@ export default function SplashPage({}) {
         setUser(data.name);
       })
   }, [])
-    return(
+    return( 
         <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
