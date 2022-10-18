@@ -21,7 +21,7 @@ function Navbar({}) {
                 </a>
                 </li>
                 <li className="nav-item pe-2">
-                <a className="nav-link" href="#">Blog Oku</a>
+                <a className="nav-link"onClick={() => Router.push("/read")}>Blog Oku</a>
                 </li>
                 <li className="nav-item pe-2">
                 <a className="nav-link" href="#">Takip Ettiklerim</a>

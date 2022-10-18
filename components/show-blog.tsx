@@ -1,7 +1,7 @@
 import { Button, Card, Form, FormLabel, Stack } from "react-bootstrap";
 import { Blog } from "../types/blog";
 
-export default function ShowBlog(blog:Blog) {
+export default function ShowBlog({blog}:{blog:Blog}) {
     return (
         <>
             <Card border="danger" >
