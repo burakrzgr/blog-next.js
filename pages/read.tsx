@@ -8,7 +8,7 @@ export default function ReadBlogPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <ShowBlog  blog={{content:"içerik içerik içerik",header:"Başlık",writer:"Burak Rüzgar"}} ></ShowBlog>
+                <ShowBlog  blog={{content:"içerik içerik içerik",header:"Başlık",writer:"Burak Rüzgar",community:{likes:5,loves:8,dislikes:2,comments:[]}}} ></ShowBlog>
             </Container>
         </main>
     );
