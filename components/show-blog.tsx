@@ -20,7 +20,7 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                 <p className="mb-2 mt-3 text-light">{blog.content}</p>
                 </Card.Body>
                 <Card.Footer className="pb-3 ">
-                   <CommunityAction blog={blog} />
+                   <CommunityAction info={blog.community} />
                 </Card.Footer>
             </Card>
         </>
