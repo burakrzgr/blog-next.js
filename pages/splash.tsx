@@ -1,9 +1,20 @@
 
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
 
 export default function SplashPage({}) {
+  const [user, setUser] = useState<string>("Burak");
+
+  useEffect(() => {
+    fetch('/api/hello')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setUser(data.name);
+      })
+  }, [])
     return(
         <div className={styles.container}>
         <Head>
@@ -20,7 +31,7 @@ export default function SplashPage({}) {
             Get started by editing{' '}
             <code className={styles.code}>pages/index.tsx</code>
           </p>
-          <p className={styles.code}>Bu yazılım <span className='text-danger'>Burak</span> tarafından geliştirildi.</p>
+          <p className={styles.code}>Bu yazılım <span className='text-danger'>{user}</span> tarafından geliştirildi.</p>
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
               <h2>Documentation &rarr;</h2>
