@@ -13,11 +13,10 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                             <p className="text-muted ms-auto p-0 m-0">Yazar</p>
                             <p className="text-secondary ms-auto p-0 m-0">{blog.writer}</p>
                         </Stack>
-                        
                     </Stack>
                 </Card.Header>
                 <Card.Body>
-                <p className="mb-2 mt-3 text-light">{blog.content}</p>
+                <p className="mb-2 mt-3 text-warning">{blog.content}</p>
                 </Card.Body>
                 <Card.Footer className="pb-3 ">
                    <CommunityAction info={blog.community} />
