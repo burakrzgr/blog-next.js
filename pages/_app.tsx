@@ -9,27 +9,32 @@ function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
     const theme = localStorage.getItem('theme') ?? "sketchy";
     // parametre hata veriyor switch case denenemedi
+   // import("bootswatch/dist/"+"vapor"+"/bootstrap.min.css");
     if (theme === "vapor") {
-      import("bootswatch/dist/vapor/bootstrap.min.css");
+      import("bootswatch/dist/"+"vapor/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     }
     if (theme === "sketchy") {
-      import("bootswatch/dist/sketchy/bootstrap.min.css");
+      import("bootswatch/dist/"+"sketchy/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     } 
     if (theme === "darkly") {
-      import("bootswatch/dist/darkly/bootstrap.min.css");
+      import("bootswatch/dist/"+"darkly/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     } 
     if (theme === "simplex") {
-      import("bootswatch/dist/simplex/bootstrap.min.css");
+      import("bootswatch/dist/"+"simplex/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     } 
     if (theme === "quartz") {
-      import("bootswatch/dist/quartz/bootstrap.min.css");
+      import("bootswatch/dist/"+"quartz/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     } 
     if (theme === "vapor,sketchy") {
-      import("bootswatch/dist/sketchy/bootstrap.min.css");
-      import("bootswatch/dist/vapor/bootstrap.min.css");
+      //import("bootswatch/dist/"+"sketchy/bootstrap.min.css");
+      //import("bootswatch/dist/"+"vapor/bootstrap.min.css");
+      setTimeout(() => {
+        setLoaded(true);
+      }, 3000);
     }
-    setLoaded(true);
-  }, [loaded]);
+    //setLoaded(true)
+    //setLoaded(true)
+  }, []);
 
   return (
     <>
@@ -37,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
           <Navbar></Navbar>
           <Component {...pageProps} />
-        </> : <p>Please wait loading</p>}
+        </> : <div className='waiting-panel'>Please wait loading</div>}
     </>)
 }
 
