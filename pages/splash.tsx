@@ -8,7 +8,7 @@ export default function SplashPage({}) {
   const [user, setUser] = useState<string>("Burak");
 
   useEffect(() => {
-    fetch('/api/hello')
+    fetch('/api/user')
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
