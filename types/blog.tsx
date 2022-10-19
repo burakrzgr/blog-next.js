@@ -5,6 +5,7 @@ export type Blog = {
     community:CommunityInfo
 }
 
+
 export type CommunityInfo = {
     likes : number,
     loves: number,
@@ -16,4 +17,9 @@ export type Comment ={
     writer :string,
     content:string,
     date : Date
+}
+export type CreateBlog = {
+    header : string,
+    content : string,
+    anon : boolean
 }

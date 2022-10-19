@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 
 
 export default function ReadBlogsPage({ }) {
-    const [blogs, setBlogs] = React.useState([{ content: "içerik içerik içerik", header: "Başlık", writer: "Burak Rüzgar", community: { likes: 5, loves: 8, dislikes: 2, comments: [] } }])
+    const [blogs, setBlogs] = React.useState([{ content: "Yapılanlar; Blok Yazma, Blog Okuma, Tema<br />Yapılacaklar; Blog kaydetme, Resim Yükleme,Yorum Yazma", header: "Başlık", writer: "Burak Rüzgar", community: { likes: 5, loves: 8, dislikes: 2, comments: [] } }])
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
