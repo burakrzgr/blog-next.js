@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Stack } from "react-bootstrap";
-import { Blog, CommunityInfo } from "../types/blog";
+import { CommunityInfo } from "../types/blog";
 
 export default function CommunityAction({info}:{info:CommunityInfo}) {
     return (
