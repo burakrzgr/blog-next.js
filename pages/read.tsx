@@ -19,7 +19,9 @@ export default function ReadBlogsPage({ }) {
             <Container className={styles.container}>
                 {blogs.map((blog, key) => {
                     return (
-                        <ShowBlog blog={blog} key={key} ></ShowBlog>
+                        <div className="pb-5" key={key}>
+                            <ShowBlog blog={blog}></ShowBlog>
+                        </div>
                     );
                 }
                 )}
