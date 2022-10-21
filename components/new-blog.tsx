@@ -1,16 +1,31 @@
 import { useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
 import { CreateBlog } from "../types/blog";
+import { database } from '../config/firebase-config';
+import { addDoc, collection } from 'firebase/firestore'
+import { Blog } from "../types/blog";
+
+const dbInstance = collection(database, 'blogs');
+
+    const saveBlog = (data: CreateBlog) => {
+        return addDoc(dbInstance,
+            { content: data.content, header: data.header, writer: data.anon?"Anonymous":"Burak Rüzgar" , community: { likes: 0, loves: 0, dislikes: 0, comments: [] } }
+        )
+    }
+
 
 export default function NewBlog(props:any) {
     const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false});
-    const send = (data:CreateBlog) => fetch('/api/blog', {
+   
+   /* const send = (data:CreateBlog) => fetch('/api/blog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
+*/
+
     return (
         <>
             <Card border="danger" >
@@ -28,9 +43,8 @@ export default function NewBlog(props:any) {
                         <Form.Check type="switch" className="ms-auto" label="Anonim olarak paylaş" 
                             onChange={(e) => setInfo({...info, anon: e.target.checked})} checked={info.anon} />
                         <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{letterSpacing: "0.1rem"}} 
-                            onClick={() => {send(info).then((res) => console.log(res))}}>Yayınla</Button>
-                            
-                            
+                            onClick={() => {saveBlog(info).then((res) => console.log(res))}}>Yayınla</Button>
+
                     </Stack>
                 </Card.Footer>
             </Card>
