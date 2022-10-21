@@ -19,7 +19,7 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                     <p className="mb-2 mt-3 text-warning" style={{whiteSpace:"pre-line"}}>{blog.content}</p>
                 </Card.Body>
                 <Card.Footer className="pb-3 ">
-                   <CommunityAction info={blog.community} />
+                   <CommunityAction info={blog.community??{likes:0,dislikes:0,loves:0,comments:[]}} />
                 </Card.Footer>
             </Card>
         </>

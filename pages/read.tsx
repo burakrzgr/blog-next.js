@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 
 
 
-import { app, database } from '../config/firebase-config';
+import { database } from '../config/firebase-config';
 import {
     doc,
     getDoc,
@@ -32,7 +32,7 @@ export default function ReadBlogsPage({ }) {
             console.log(data)
             //setBlogs(data);
           })*/
-         // saveData();
+         //// saveData();
           getData();
 
 
