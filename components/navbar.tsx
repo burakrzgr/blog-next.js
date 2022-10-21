@@ -9,25 +9,25 @@ function Navbar({}) {
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-            <a className="navbar-brand fs-3 fw-bold pe-3" onClick={() => Router.push("/")}>My Blog App</a>
+            <a className="navbar-brand fs-3 fw-bold pe-3" onClick={() => Router.push("/")} role='button'>My Blog App</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
                 <li className="nav-item pe-2">
-                <a className="nav-link active" onClick={() => Router.push("/new")}>Yeni Yazı
+                <a className="nav-link active" onClick={() => Router.push("/new")} role='button'>Yeni Yazı
                     <span className="visually-hidden">(current)</span>
                 </a>
                 </li>
                 <li className="nav-item pe-2">
-                <a className="nav-link"onClick={() => Router.push("/read")}>Blog Oku</a>
+                <a className="nav-link"onClick={() => Router.push("/read")} role='button'>Blog Oku</a>
                 </li>
                 <li className="nav-item pe-2">
-                <a className="nav-link" href="#">Takip Ettiklerim</a>
+                <a className="nav-link" href="#">Takiptekiler</a>
                 </li>
                 <li className="nav-item pe-2">
-                <a className="nav-link" href="#">Benim Yazdıklarım</a>
+                <a className="nav-link" href="#">Yazdıklarım</a>
                 </li>
             </ul>
             <div className="pe-4">

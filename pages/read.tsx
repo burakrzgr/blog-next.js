@@ -9,7 +9,7 @@ import { Blog } from "../types/blog";
 const dbInstance = collection(database, 'blogs');
 
 export default function ReadBlogsPage({ }) {
-    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [blogs, setBlogs] = useState<{load:boolean,blog:Blog[]}>({load:false,blog:[]});
     useEffect(() => {
         getData();
     }, []);
@@ -17,21 +17,22 @@ export default function ReadBlogsPage({ }) {
     const getData = () => {
         getDocs(dbInstance)
             .then((data) => {
-                setBlogs(data.docs.map(x => { return x.data() as Blog }));
+                setBlogs({load:true,blog:data.docs.map(x => { return x.data() as Blog })});
             });
     }
 
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                {blogs.map((blog, key) => {
+                {blogs.load?
+                blogs.blog.map((blog, key) => {
                     return (
                         <div className="pb-5" key={key}>
                             <ShowBlog blog={blog}></ShowBlog>
                         </div>
                     );
                 }
-                )}
+                ):<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
             </Container>
         </main>
     );
