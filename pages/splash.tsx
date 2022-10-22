@@ -31,7 +31,7 @@ export default function SplashPage({}) {
             Get started by editing{' '}
             <code className={styles.code}>pages/index.tsx</code>
           </p>
-          <p className={styles.code}>Bu yazılım <span className='text-danger'>{user}</span> tarafından geliştirildi.</p>
+          <p className={styles.code + " text-warning"}>Bu yazılım <span className='text-danger'>{user}</span> tarafından geliştirildi.</p>
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
               <h2>Documentation &rarr;</h2>
