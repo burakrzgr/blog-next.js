@@ -24,7 +24,10 @@ function Navbar({}) {
                 <a className="nav-link"onClick={() => Router.push("/read")} role='button'>Blog Oku</a>
                 </li>
                 <li className="nav-item pe-2">
-                <a className="nav-link" href="#">Takiptekiler</a>
+                <a className="nav-link" href="#">Takibimdekiler</a>
+                </li>
+                <li className="nav-item pe-2">
+                <a className="nav-link" href="#">Keşfet</a>
                 </li>
                 <li className="nav-item pe-2">
                 <a className="nav-link" href="#">Yazdıklarım</a>
