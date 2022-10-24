@@ -1,4 +1,5 @@
 export type Blog = {
+    blogId:string
     header : string,
     writer:string,
     content : string,

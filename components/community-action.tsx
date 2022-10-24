@@ -4,9 +4,10 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
 
-export default function CommunityAction({info}:{info:CommunityInfo}) {
+export default function CommunityAction({blogId,info}:{blogId:string,info:CommunityInfo}) {
     const [commenting, setCommenting] = useState(false);
     const commentRef = createRef<HTMLTextAreaElement>();
+
     return (
         <div>
             <Stack direction="horizontal" >
@@ -21,7 +22,7 @@ export default function CommunityAction({info}:{info:CommunityInfo}) {
                     <div style={{display:"table-cell"}}  className="col-10">
                         <Form.Control ref={commentRef} type="text" placeholder="Yorum Yazın"  as="textarea" rows={4}></Form.Control>
                     </div>
-                    <div style={{display:"table-cell"}}  className="btn btn-outline-dark col-2">Gönder
+                    <div style={{display:"table-cell"}}  className="btn btn-outline-dark col-2" onClick={() => {}}>Gönder
                     </div>
                 </div>:<></>}</div>
             <div className="me-2 mt-4 text-muted">

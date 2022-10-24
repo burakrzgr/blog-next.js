@@ -17,7 +17,7 @@ export default function ReadBlogsPage({ }) {
     const getData = () => {
         getDocs(dbInstance)
             .then((data) => {
-                setBlogs({load:true,blog:data.docs.map(x => { return x.data() as Blog })});
+                setBlogs({load:true,blog:data.docs.map(x => { return {blogId:x.id,...x.data()} as Blog })});
             });
     }
 
