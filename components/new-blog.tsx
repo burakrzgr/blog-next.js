@@ -3,7 +3,6 @@ import { Button, Card, Form, Stack } from "react-bootstrap";
 import { CreateBlog } from "../types/blog";
 import { database } from '../config/firebase-config';
 import { addDoc, collection } from 'firebase/firestore'
-import { Blog } from "../types/blog";
 
 const dbInstance = collection(database, 'blogs');
 
@@ -16,15 +15,6 @@ const dbInstance = collection(database, 'blogs');
 
 export default function NewBlog(props:any) {
     const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false});
-   
-   /* const send = (data:CreateBlog) => fetch('/api/blog', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-*/
 
     return (
         <>

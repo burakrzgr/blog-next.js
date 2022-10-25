@@ -1,12 +1,22 @@
 import Image from "next/image";
 import { createRef, useRef, useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
-import { CommunityInfo } from "../types/blog";
+import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
+import { database } from '../config/firebase-config';
+import { addDoc, collection, doc, getDoc, query, updateDoc, where } from 'firebase/firestore'
+
+const dbInstance = collection(database, 'blogs');
 
 export default function CommunityAction({blogId,info}:{blogId:string,info:CommunityInfo}) {
     const [commenting, setCommenting] = useState(false);
     const commentRef = createRef<HTMLTextAreaElement>();
+
+    const saveComment = (data: Comment) => {
+        const dbdoc = doc(database, 'blogs', blogId);
+        console.log('b',blogId,dbdoc);
+        return updateDoc(dbdoc,{community:{comments:[{content:data.content}]}});
+    }
 
     return (
         <div>
@@ -22,7 +32,7 @@ export default function CommunityAction({blogId,info}:{blogId:string,info:Commun
                     <div style={{display:"table-cell"}}  className="col-10">
                         <Form.Control ref={commentRef} type="text" placeholder="Yorum Yazın"  as="textarea" rows={4}></Form.Control>
                     </div>
-                    <div style={{display:"table-cell"}}  className="btn btn-outline-dark col-2" onClick={() => {}}>Gönder
+                    <div style={{display:"table-cell"}}  className="btn btn-outline-dark col-2" onClick={() => saveComment({content:commentRef.current?.value??"",date:new Date(),writer:"Burak Rzgr"})}>Gönder
                     </div>
                 </div>:<></>}</div>
             <div className="me-2 mt-4 text-muted">
