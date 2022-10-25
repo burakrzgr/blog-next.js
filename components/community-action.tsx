@@ -45,7 +45,7 @@ export default function CommunityAction({blogId,info}:{blogId:string,info:Commun
                 </div>:<></>}</div>
             <div className="me-2 mt-4 text-muted">
                 <span className="m-0 ms-1">
-                    <CommentDisplay comments={info.comments??[]} ></CommentDisplay>
+                    <CommentDisplay comments={info.comments??{}} ></CommentDisplay>
                 </span>
             </div> 
         </div>
