@@ -11,7 +11,7 @@ export type CommunityInfo = {
     likes : number,
     loves: number,
     dislikes : number,
-    comments : Comment[]
+    comments : any
 }
 
 export type Comment ={
