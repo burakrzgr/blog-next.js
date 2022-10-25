@@ -4,7 +4,7 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
 import { database } from '../config/firebase-config';
-import { addDoc, collection, doc, getDoc, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import { collection, doc, setDoc } from 'firebase/firestore'
 
 const dbInstance = collection(database, 'blogs');
 
