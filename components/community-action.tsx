@@ -4,7 +4,7 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
 import { database } from '../config/firebase-config';
-import { addDoc, collection, doc, getDoc, query, updateDoc, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, query, setDoc, updateDoc, where } from 'firebase/firestore'
 
 const dbInstance = collection(database, 'blogs');
 
@@ -15,7 +15,15 @@ export default function CommunityAction({blogId,info}:{blogId:string,info:Commun
     const saveComment = (data: Comment) => {
         const dbdoc = doc(database, 'blogs', blogId);
         console.log('b',blogId,dbdoc);
-        return updateDoc(dbdoc,{community:{comments:[{content:data.content}]}});
+        const newGuid = doc(dbInstance).id;
+        setDoc(dbdoc,
+            {'community':
+                {'comments':
+                    {[newGuid] :{'content':data.content}}
+                }
+            },
+            {merge:true}
+        );
     }
 
     return (
