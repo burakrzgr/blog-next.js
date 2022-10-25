@@ -14,12 +14,11 @@ export default function CommunityAction({blogId,info}:{blogId:string,info:Commun
 
     const saveComment = (data: Comment) => {
         const dbdoc = doc(database, 'blogs', blogId);
-        console.log('b',blogId,dbdoc);
         const newGuid = doc(dbInstance).id;
         setDoc(dbdoc,
             {'community':
                 {'comments':
-                    {[newGuid] :{'content':data.content}}
+                    {[newGuid] :{'content':data.content,writer:data.writer, date:data.date}}
                 }
             },
             {merge:true}

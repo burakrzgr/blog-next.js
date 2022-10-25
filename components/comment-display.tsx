@@ -1,4 +1,5 @@
 import React from "react";
+import { Stack } from "react-bootstrap";
 import { Comment } from "../types/blog";
 
 
@@ -8,10 +9,13 @@ export default function CommentDisplay({ comments }: { comments: any }) {
     return (
         <>
             {Object.keys(comments).map((id, inx) => { if (inx >= count) return; return (
-                <div key={inx} className="border rounded-1 p-2 m-1">
-                    <div className="badge bg-danger">{comments[id].writer}</div>
-                    <div>{comments[id].content}</div>
-                </div>
+                <Stack key={inx} className="border rounded-1 p-2 m-1" direction="horizontal">
+                    <div >
+                        <div className="badge bg-danger">{comments[id].writer}</div>
+                        <div className="mt-1">{comments[id].content}</div>
+                    </div>
+                    <div className="ms-auto mb-auto badge bg-info" >{comments[id].date?comments[id].date.toDate().toLocaleString('tr-TR'):"Tarih Yok"}</div>
+                </Stack>
             ) })}
             {(numOfcom?? 0) === 0 ?
                 <div>Henüz kimse yorum yazmadı. Düşüncelerini paylaşan ilk kişi sen ol.</div> :
