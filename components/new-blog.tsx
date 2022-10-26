@@ -7,7 +7,7 @@ import { addDoc, collection } from 'firebase/firestore'
 const dbInstance = collection(database, 'blogs');
 
     const saveBlog = (data: CreateBlog) => {
-        return addDoc(dbInstance,
+        addDoc(dbInstance,
             { content: data.content, header: data.header, writer: data.anon?"Anonymous":"Burak Rüzgar" , community: { likes: 0, loves: 0, dislikes: 0, comments: [] } }
         )
     }
