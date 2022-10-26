@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const theme = localStorage.getItem('theme') ?? "sketchy";
     // parametre hata veriyor switch case denenemedi
    // import("bootswatch/dist/"+"vapor"+"/bootstrap.min.css");
+   
     if (theme === "vapor") {
       import("bootswatch/dist/"+"vapor/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     }
@@ -25,15 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (theme === "quartz") {
       import("bootswatch/dist/"+"quartz/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     } 
-    if (theme === "vapor,sketchy") {
-      //import("bootswatch/dist/"+"sketchy/bootstrap.min.css");
-      //import("bootswatch/dist/"+"vapor/bootstrap.min.css");
-      setTimeout(() => {
-        setLoaded(true);
-      }, 3000);
-    }
-    //setLoaded(true)
-    //setLoaded(true)
   }, []);
 
   return (
