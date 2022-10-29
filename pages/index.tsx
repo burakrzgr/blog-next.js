@@ -4,7 +4,7 @@ import SplashPage from './splash'
 
 const Home: NextPage = () => {
   return (
-      <SplashPage></SplashPage>
+    <SplashPage></SplashPage>
   )
 }
 
