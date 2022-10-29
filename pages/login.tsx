@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { useState } from 'react';
 import { Button, Container, Form, Stack } from 'react-bootstrap';
 import { useAuth } from '../context/auth-context';
@@ -19,6 +20,7 @@ async function submitHandler(){
     else{
         await signup(email,password);
     }
+    await Router.push("/read");
 } 
 
   return (

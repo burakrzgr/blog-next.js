@@ -16,7 +16,7 @@ function Navbar({ }) {
         logout();
         await Router.push("/");
     }
-    
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
@@ -58,10 +58,10 @@ function Navbar({ }) {
                     <div className="ms-2">
                         {user && user.uid ?
                             <Button variant="danger" onClick={() => logoutHandle()}>
-                                <FaCross>Çıkış Yap</FaCross>
+                                <FaCross></FaCross><span>Çıkış Yap</span>
                             </Button> :
                             <Button variant="primary" onClick={() => Router.push("/login")}>
-                                <FaUser>Giriş Yap</FaUser>
+                                <FaUser></FaUser><span>Giriş Yap</span>
                             </Button>}
                     </div>
                 </div>
