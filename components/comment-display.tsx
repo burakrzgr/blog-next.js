@@ -1,6 +1,5 @@
 import React from "react";
 import { Stack } from "react-bootstrap";
-import { Comment } from "../types/blog";
 
 
 export default function CommentDisplay({ comments }: { comments: any }) {

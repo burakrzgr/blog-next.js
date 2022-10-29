@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { createRef, useRef, useState } from "react";
+import { createRef, useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";

@@ -1,6 +1,6 @@
 import Router from "next/router";
 import React from "react";
-import { Dropdown,Form,Button } from "react-bootstrap";
+import { Form,Button } from "react-bootstrap";
 import ButtonGroup from 'react-bootstrap/InputGroup';
 import ThemePicker from "./theme-picker";
 
