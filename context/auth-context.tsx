@@ -7,13 +7,22 @@ import {
 import { createContext, useContext, useState, useRef, useEffect } from "react";
 import { auth } from "../config/firebase-config";
 
-const AuthContext = createContext({});
+
+interface AuthProviderInterface {
+    signup: Function;
+    login: Function;
+    logout: Function;
+    user?: any;
+  }
+
+
+const AuthContext = createContext<AuthProviderInterface>({login:() => {},logout:() => {},signup:() => {},user:null});;
 
 export function useAuth() {
     return useContext(AuthContext);
 }
 
-export function AuthProvider({ children }: { children: JSX.Element }) {
+export function AuthProvider({ children }: { children: JSX.Element })  {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
     const userRef = useRef();
