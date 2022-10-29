@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect,useState } from "react";
 import { Stack } from "react-bootstrap";
 import { database } from "../config/firebase-config";
@@ -17,17 +17,13 @@ export default function CommentDisplay({ blogId }: { comments: any,blogId:string
 
     useEffect(() => {
        
-        let ref = collection(database, `blogs/${blogId}/comments`);
-        onSnapshot(ref,(snapshot) => {
+        let qu = query(collection(database, `blogs/${blogId}/comments`),orderBy('date','desc'));
+        onSnapshot(qu,(snapshot) => {
             let list :Comment[] =[]; 
           snapshot.forEach((doc) => list.push(doc.data() as Comment));
           setComments(list);
         });
       }, []);
-
-
-
-
 
     return (
        
@@ -40,7 +36,7 @@ export default function CommentDisplay({ blogId }: { comments: any,blogId:string
                             <div className="badge bg-danger">{com.writer}</div>
                             <div className="mt-1">{com.content}</div>
                         </div>
-                        <div className="ms-auto mb-auto badge bg-info" >{com.date?com.date.toLocaleString('tr-TR'):"Tarih Yok"}</div>
+                        <div className="ms-auto mb-auto badge bg-info" >{com.date?com.date.toDate().toLocaleString('tr-TR'):"Tarih Yok"}</div>
                     </Stack>)
             })}
             {(comments.length ?? 0) === 0 ?

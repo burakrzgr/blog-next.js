@@ -17,7 +17,7 @@ export type CommunityInfo = {
 export type Comment ={
     writer :string,
     content:string,
-    date : Date
+    date : any
 }
 export type CreateBlog = {
     header : string,
