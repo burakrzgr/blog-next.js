@@ -1,10 +1,31 @@
-import React from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import React, { useEffect } from "react";
 import { Stack } from "react-bootstrap";
+import { database } from "../config/firebase-config";
+
 
 
 export default function CommentDisplay({ comments,blogId }: { comments: any,blogId:string }) {
+    const dbInstance = collection(database, `blogs/${blogId}/comments`);
+    
+
     const [count, setCount] = React.useState(0);
     const numOfcom =Object.keys(comments).length;
+
+
+    useEffect(() => {
+       
+        let ref = collection(database, `blogs/${blogId}/comments`);
+        onSnapshot(ref,(snapshot) => {
+         // const postData = [];
+          snapshot.forEach((doc) => console.log({ ...doc.data(), id: doc.id }));
+        });
+      }, []);
+
+
+
+
+
     return (
         <>
             {Object.keys(comments).map((id, inx) => { if (inx >= count) return; return (
