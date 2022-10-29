@@ -11,16 +11,17 @@ export default function CommentDisplay({ blogId }: { comments: any,blogId:string
     
 
     const [count, setCount] = React.useState(2);
-    const [comments, setComments] = React.useState([]);
+    const [comments, setComments] = React.useState<Comment[]>([]);
     const numOfcom = comments.length;
 
 
     useEffect(() => {
-       setComments([]);
+       
         let ref = collection(database, `blogs/${blogId}/comments`);
         onSnapshot(ref,(snapshot) => {
-         // const postData = [];
-          snapshot.forEach((doc) => setComments((prev) => [...prev, doc.data() as Comment]));
+            let list :Comment[] =[]; 
+          snapshot.forEach((doc) => list.push(doc.data() as Comment));
+          setComments(list);
         });
       }, []);
 
