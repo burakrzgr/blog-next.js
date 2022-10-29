@@ -1,26 +1,26 @@
 export type Blog = {
-    blogId:string
-    header : string,
-    writer:string,
-    content : string,
-    community:CommunityInfo
+    blogId: string
+    header: string,
+    writer: string,
+    content: string,
+    community: CommunityInfo
 }
 
 
 export type CommunityInfo = {
-    likes : number,
+    likes: number,
     loves: number,
-    dislikes : number,
-    comments : any
+    dislikes: number,
+    comments: any
 }
 
-export type Comment ={
-    writer :string,
-    content:string,
-    date : any
+export type Comment = {
+    writer: string,
+    content: string,
+    date: any
 }
 export type CreateBlog = {
-    header : string,
-    content : string,
-    anon : boolean
+    header: string,
+    content: string,
+    anon: boolean
 }
