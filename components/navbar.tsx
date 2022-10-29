@@ -58,10 +58,10 @@ function Navbar({ }) {
                     <div className="ms-2">
                         {user && user.uid ?
                             <Button variant="danger" onClick={() => logoutHandle()}>
-                                <FaCross></FaCross><span>Çıkış Yap</span>
+                                <FaCross></FaCross><span className="ms-1">Çıkış Yap</span>
                             </Button> :
-                            <Button variant="primary" onClick={() => Router.push("/login")}>
-                                <FaUser></FaUser><span>Giriş Yap</span>
+                            <Button variant="primary" onClick={() => async () => { await Router.push("/login")}}>
+                                <FaUser></FaUser><span className="ms-1">Giriş Yap</span>
                             </Button>}
                     </div>
                 </div>
