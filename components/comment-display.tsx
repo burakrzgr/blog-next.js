@@ -2,7 +2,7 @@ import React from "react";
 import { Stack } from "react-bootstrap";
 
 
-export default function CommentDisplay({ comments }: { comments: any }) {
+export default function CommentDisplay({ comments,blogId }: { comments: any,blogId:string }) {
     const [count, setCount] = React.useState(0);
     const numOfcom =Object.keys(comments).length;
     return (
