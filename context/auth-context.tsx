@@ -38,9 +38,10 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {});
-            setUser(user);
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            setUser(user??{});
             setLoading(false);
+        });
         return unsubscribe;
     }, []);
 
