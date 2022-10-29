@@ -2,19 +2,26 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/auth-context';
 import styles from '../styles/Home.module.css'
 
 export default function SplashPage({}) {
-  const [user, setUser] = useState<string>("Burak");
+  const [userApi, setUserApi] = useState<string>("Burak");
 
   useEffect(() => {
     fetch('/api/user')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        setUser(data.name);
+        setUserApi(data.name);
       })
-  }, [])
+  }, []);
+
+
+  const {user,logout} = useAuth();
+  function logoutHandle() {
+    logout();
+  }
+  
     return(
         <div className={styles.container}>
         <Head>
@@ -31,7 +38,9 @@ export default function SplashPage({}) {
             Get started by editing{' '}
             <code className={styles.code}>pages/index.tsx</code>
           </p>
-          <p className={styles.code + " text-warning"}>Bu yazılım <span className='text-danger'>{user}</span> tarafından geliştirildi.</p>
+          <p className={styles.code + " text-warning"}>Bu yazılım <span className='text-danger'>{user?"Ben":"Yok"}</span> tarafından geliştirildi.</p>
+
+          <p className={styles.description + " btn btn-danger ps-4 pe-4"} onClick={() => logoutHandle()}>Çık</p>
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
               <h2>Documentation &rarr;</h2>
