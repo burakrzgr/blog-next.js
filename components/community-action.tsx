@@ -4,27 +4,17 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
 import { database } from '../config/firebase-config';
-import { collection, doc, setDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 
-const dbInstance = collection(database, 'blogs');
+//const dbInstance = collection(database, 'blogs');
 
 export default function CommunityAction({ blogId, info }: { blogId: string, info: CommunityInfo }) {
     const [commenting, setCommenting] = useState(false);
     const commentRef = createRef<HTMLTextAreaElement>();
 
     const saveComment = (data: Comment) => {
-        const dbdoc = doc(database, 'blogs', blogId);
-        const newGuid = doc(dbInstance).id;
-        setDoc(dbdoc,
-            {
-                'community':
-                {
-                    'comments':
-                        { [newGuid]: { 'content': data.content, writer: data.writer, date: data.date } }
-                }
-            },
-            { merge: true }
-        );
+        const db = collection(database, `blogs/${blogId}/comments`);
+        addDoc(db, data).then((res => setCommenting(false)));
     }
 
     return (

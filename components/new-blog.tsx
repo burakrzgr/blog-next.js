@@ -9,7 +9,7 @@ const dbInstance = collection(database, 'blogs');
     const saveBlog = (data: CreateBlog) => {
         addDoc(dbInstance,
             { content: data.content, header: data.header, writer: data.anon?"Anonymous":"Burak Rüzgar" , community: { likes: 0, loves: 0, dislikes: 0, comments: [] } }
-        )
+        ).then((res) => console.log(res));
     }
 
 
@@ -33,7 +33,7 @@ export default function NewBlog(props:any) {
                         <Form.Check type="switch" className="ms-auto" label="Anonim olarak paylaş" 
                             onChange={(e) => setInfo({...info, anon: e.target.checked})} checked={info.anon} />
                         <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{letterSpacing: "0.1rem"}} 
-                            onClick={() => {saveBlog(info).then((res) => console.log(res))}}>Yayınla</Button>
+                            onClick={() => saveBlog(info)}>Yayınla</Button>
                     </Stack>
                 </Card.Footer>
             </Card>
