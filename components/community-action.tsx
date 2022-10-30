@@ -4,7 +4,8 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
 import CommentDisplay from "./comment-display";
 import { database } from '../config/firebase-config';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
+import { AiOutlineLike, AiOutlineDislike,AiOutlineHeart, AiOutlineComment, AiOutlineMore } from 'react-icons/ai';
 
 //const dbInstance = collection(database, 'blogs');
 
@@ -20,11 +21,13 @@ export default function CommunityAction({ blogId, info }: { blogId: string, info
     return (
         <div>
             <Stack direction="horizontal" >
-                <Button variant="primary" size="lg" className="me-2"><Image className="" src="/svg/like.svg" alt="Like Icon" width={20} height={20} /><span className="m-0 ms-1">{info.likes} Beğeni</span></Button>
-                <Button variant="primary" size="lg" className="me-2"><Image src="/svg/heart.svg" alt="Love Icon" width={20} height={20} /><span className="m-0 ms-1">{info.loves} Hayran</span></Button>
-                <Button variant="secondary" size="lg" className="me-2"><Image src="/svg/dislike.svg" alt="Dislike Icon" width={20} height={20} /><span className="m-0 ms-1">{info.dislikes} Yuhlama</span></Button>
-                <Button variant="danger" size="lg" className="me-2 ms-5" onClick={() => { setCommenting(!commenting) }}><Image src="/svg/speech.svg" alt="Comment Icon" width={20} height={20} /><span className="m-0 ms-1">{commenting ? "Neyse Vazgeçtim" : "Yorum Yaz"}</span></Button>
-                <Button variant="secondary" size="lg" className="me-2 ms-auto" ><Image src="/svg/more.svg" alt="More Icon" width={20} height={20} /></Button>
+                <Button variant="primary" size="lg" className="me-2"><AiOutlineLike /><span className="m-0 ms-1">{info.likes} Beğeni</span></Button>
+                <Button variant="primary" size="lg" className="me-2"><AiOutlineHeart /><span className="m-0 ms-1">{info.loves} Hayran</span></Button>
+                <Button variant="secondary" size="lg" className="me-2"><AiOutlineDislike /><span className="m-0 ms-1">{info.dislikes} Yuhlama</span></Button>
+                <Button variant="danger" size="lg" className="me-2 ms-5" onClick={() => { setCommenting(!commenting) }}>
+                    <AiOutlineComment /><span className="m-0 ms-1">{commenting ? "Neyse Vazgeçtim" : "Yorum Yaz"}</span>
+                </Button>
+                <Button variant="secondary" size="lg" className="me-2 ms-auto" ><AiOutlineMore /></Button>
             </Stack>
             <div>{commenting ?
                 <div style={{ display: "table", width: "100%" }} className="mt-4">
