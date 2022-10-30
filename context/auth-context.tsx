@@ -28,13 +28,13 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
     const userRef = useRef();
 
     function signup(email: string, pasword: string) {
-        createUserWithEmailAndPassword(auth, email, pasword);
+        return createUserWithEmailAndPassword(auth, email, pasword);
     }    
     function login(email: string, pasword: string) {
-        signInWithEmailAndPassword(auth, email, pasword);
+        return signInWithEmailAndPassword(auth, email, pasword);
     }
     function logout() {
-        signOut(auth);
+        return signOut(auth);
     }
 
     useEffect(() => {
