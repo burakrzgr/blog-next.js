@@ -3,7 +3,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import ButtonGroup from 'react-bootstrap/InputGroup';
 import ThemePicker from "./theme-picker";
-import { FaUser, FaCross } from 'react-icons/fa';
+import { CgUser, CgLogOut } from 'react-icons/cg';
 import { useAuth } from "../context/auth-context";
 
 
@@ -58,10 +58,10 @@ function Navbar({ }) {
                     <div className="ms-2">
                         {user && user.uid ?
                             <Button variant="danger" onClick={() => logoutHandle()}>
-                                <FaCross></FaCross><span className="ms-1">Çıkış Yap</span>
+                                <CgLogOut></CgLogOut><span className="ms-1">Çıkış Yap</span>
                             </Button> :
-                            <Button variant="primary" onClick={() => async () => { await Router.push("/login")}}>
-                                <FaUser></FaUser><span className="ms-1">Giriş Yap</span>
+                            <Button variant="light" onClick={async () => { await Router.push("/login")}}>
+                                <CgUser></CgUser><span className="ms-1">Giriş Yap</span>
                             </Button>}
                     </div>
                 </div>
