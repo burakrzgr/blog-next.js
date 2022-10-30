@@ -55,7 +55,7 @@ function Navbar({ }) {
                     </form>
                 </div>
                 <div>
-                    <div className="ms-2">
+                    <div className="ps-5">
                         {user && user.uid ?
                             <Button variant="danger" onClick={() => logoutHandle()}>
                                 <CgLogOut></CgLogOut><span className="ms-1">Çıkış Yap</span>
