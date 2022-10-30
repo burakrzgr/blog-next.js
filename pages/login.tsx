@@ -5,8 +5,20 @@ import { Alert, Button, Card, Container, Form, Stack } from 'react-bootstrap';
 import { useAuth } from '../context/auth-context';
 import styles from '../styles/Home.module.css'
 
+type StringMap = {
+    [key: string]: string;
+  };
+   
+  const errorTranslate: StringMap = {
+    'auth/invalid-email' : "Mail adresi hatalı!",
+    'auth/user-not-found' : "Kullanıcı Bulunamadı!",
+    'auth/wrong-password' : "Hatalı Şifre!",
+    'auth/email-already-in-use' : "Bu Mail Adresi Kullanılıyor!",
+    'auth/internal-error':"Bilinmeyen Bir Hata!"
+  };
+
 export default function Login() {
-    const { login, signup, user } = useAuth();
+    const { login, signup } = useAuth();
 
     const [isLogginIn, setIsLogginIn] = useState(true);
     const [email, setEmail] = useState("");
@@ -28,19 +40,18 @@ export default function Login() {
             }
             catch(err){
                 if(err instanceof FirebaseError){
-                    setError(err.code);
+                    setError(errorTranslate[err.code]??"Bilinmeyen Hata! ("+err.code+")");
                 }
             }
-                //.then(() => Router.push("/read")).error((ex:any) => console.log("1",ex));
         }
         else {
             try{
-                await signup(email, password);
+                await signup(email, password,username);
                 redirect = true;
             }
             catch(err){
                 if(err instanceof FirebaseError){
-                    setError(err.code);
+                    setError(errorTranslate[err.code]??"Bilinmeyen Hata! ("+err.code+")");
                 }
             }
         }
@@ -58,7 +69,7 @@ export default function Login() {
                             {isLogginIn ? <h2>Giriş</h2> : <h2>Kayıt</h2>}
                         </div>
                         <Stack direction='vertical' gap={2} className="p-2">
-                            {error.length>0?<Alert variant='danger'>{error}</Alert>:<></>}
+                            {error && error.length>0?<Alert variant='danger'>{error}</Alert>:<></>}
                             {!isLogginIn ?
                                 <Form.Group>
                                     <Form.Label>Kullanıcı Adı</Form.Label>
@@ -83,7 +94,7 @@ export default function Login() {
                     </Card.Body>
                     <Card.Footer>
                         <Stack direction='horizontal' className='p-2'>
-                            <Button variant='outline-secondary' onClick={() => setIsLogginIn(!isLogginIn)}>Hesabın Yok mu?</Button>
+                            <Button variant='outline-secondary' onClick={() => setIsLogginIn(!isLogginIn)}> {isLogginIn ?<>Hesabın Yok mu?</>:<>Hesabın Var mı?</>}</Button>
                             <Button variant='primary ms-auto' onClick={() => submitHandler()}> {isLogginIn ?<>Giriş Yap</>:<>Kayıt Ol</>}</Button>
                         </Stack>
                     </Card.Footer>

@@ -39,7 +39,7 @@ export default function SplashPage({}) {
             Get started by editing{' '}
             <code className={styles.code}>pages/index.tsx</code>
           </p>
-          <p className={styles.code + " text-warning"}>Bu yazılım <span className='text-danger'>{user?user.email:"Yok"}</span> tarafından geliştirildi.</p>
+          <p className={styles.code + " text-warning"}>Bu yazılım <span className='text-danger'>{user?user.displayName:"Yok"}</span> tarafından geliştirildi.</p>
 
           <p className={styles.description + " btn btn-danger ps-4 pe-4"} onClick={() => logoutHandle()}>Çık</p>
           <div className={styles.grid}>
