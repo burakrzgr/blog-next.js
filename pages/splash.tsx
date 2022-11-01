@@ -6,16 +6,6 @@ import { useAuth } from '../context/auth-context';
 import styles from '../styles/Home.module.css'
 
 export default function SplashPage({}) {
-  const [userApi, setUserApi] = useState<string>("Burak");
-
-  useEffect(() => {
-    fetch('/api/user')
-      .then((res) => res.json())
-      .then((data) => {
-        setUserApi(data.name);
-      })
-  }, []);
-
 
   const {user,logout} = useAuth();
   function logoutHandle() {
