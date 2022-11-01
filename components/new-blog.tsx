@@ -3,18 +3,23 @@ import { Button, Card, Form, Stack } from "react-bootstrap";
 import { CreateBlog } from "../types/blog";
 import { database } from '../config/firebase-config';
 import { addDoc, collection } from 'firebase/firestore'
+import { useAuth } from "../context/auth-context";
 
 const dbInstance = collection(database, 'blogs');
 
-    const saveBlog = (data: CreateBlog) => {
-        addDoc(dbInstance,
-            { content: data.content, header: data.header, writer: data.anon?"Anonymous":"Burak Rüzgar" , community: { likes: 0, loves: 0, dislikes: 0, comments: [] } }
-        ).then((res) => console.log(res));
-    }
 
 
-export default function NewBlog(props:any) {
-    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false});
+    
+const saveBlog = (data: CreateBlog) => {
+    addDoc(dbInstance,
+        { content: data.content, header: data.header, writerId: data.anon?"RxrvSA0ZawSjanoiUYPhUW6dCu93":data.userId }
+    ).then((res) => console.log(res));
+}
+
+
+export default function NewBlog() {
+    const {user} = useAuth();
+    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false,userId:''});
 
     return (
         <>
@@ -33,7 +38,7 @@ export default function NewBlog(props:any) {
                         <Form.Check type="switch" className="ms-auto" label="Anonim olarak paylaş" 
                             onChange={(e) => setInfo({...info, anon: e.target.checked})} checked={info.anon} />
                         <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{letterSpacing: "0.1rem"}} 
-                            onClick={() => saveBlog(info)}>Yayınla</Button>
+                            onClick={() => saveBlog({...info, userId: user.uid})}>Yayınla</Button>
                     </Stack>
                 </Card.Footer>
             </Card>

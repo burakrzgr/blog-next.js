@@ -22,5 +22,6 @@ export type Comment = {
 export type CreateBlog = {
     header: string,
     content: string,
-    anon: boolean
+    anon: boolean,
+    userId: string
 }
