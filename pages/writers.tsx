@@ -33,7 +33,7 @@ export default function Writers ({}) {
                         <Col sm={6} lg={3}>{x.writerId}</Col>
                         <Col sm={6} lg={3}>{x.nickname}</Col>
                         <Col sm={12} lg={4}><InterestDisplay interests={x.interests}></InterestDisplay></Col>
-                        <Col sm={12} lg={2}><Button onClick={() => Router.push("/writer/"+x.writerId)}></Button></Col>
+                        <Col sm={12} lg={2}><Button variant="dark" onClick={() => Router.push("/writer/"+x.writerId)}>Görüntüle</Button></Col>
                     </Row>
             </div>)})}
         </Container>
