@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       import("bootswatch/dist/" + "vapor/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     }
     if (theme === "sketchy") {
-      import("bootswatch/dist/" + "sketchy/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
+      import('../styles/themes/'+ "sketchy/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
     }
     if (theme === "darkly") {
       import("bootswatch/dist/" + "darkly/bootstrap.min.css").then(() => setLoaded(true)).catch(x => console.log(x));
