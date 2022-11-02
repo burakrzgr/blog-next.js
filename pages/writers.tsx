@@ -26,9 +26,10 @@ export default function Writers ({}) {
         <Container className={styles.container}>
             <h3>List of Writers</h3>
             {writers.users.map((x,k) => {return (<div key={k}>
-                    <Row className='border myborder'>
-                        <Col sm={12} lg={6}>{x.writerId}</Col>
-                        <Col sm={12} lg={6}>{x.nickname}</Col>
+                    <Row className='border myborder m-2 p-2'>
+                        <Col sm={12} lg={4}>{x.writerId}</Col>
+                        <Col sm={12} lg={4}>{x.nickname}</Col>
+                        <Col sm={12} lg={4}>{x.interests}</Col>
                     </Row>
             </div>)})}
         </Container>
