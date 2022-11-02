@@ -18,7 +18,9 @@ export default function ReadBlogsPage({ }) {
         getDocs(dbInstance)
             .then((data) => {
                 //data.docs.map(x => console.log({...x.data(),community:{...x.data().community, comments: [...x.data().community.comments.value] }} as Blog));
-                setBlogs({load:true,blog:data.docs.map(x => { return {blogId:x.id,...x.data()} as Blog })});
+                setBlogs({load:true,blog:data.docs.map(x => { 
+                    //console.log(x.get("writer"));
+                    return {blogId:x.id,...x.data()} as Blog })});
             });
     }
 

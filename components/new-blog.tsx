@@ -11,15 +11,21 @@ const dbInstance = collection(database, 'blogs');
 
     
 const saveBlog = (data: CreateBlog) => {
+    console.log(data.writer)
+
     addDoc(dbInstance,
-        { content: data.content, header: data.header, writerId: data.anon?"RxrvSA0ZawSjanoiUYPhUW6dCu93":data.userId }
+        { content: data.content, header: data.header, writer: 
+            data.anon?
+                {["RxrvSA0ZawSjanoiUYPhUW6dCu93"]:{username:"Anon",image:"test",color:"000000"}}:
+                data.writer
+        }
     ).then((res) => console.log(res));
 }
 
 
 export default function NewBlog() {
     const {user} = useAuth();
-    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false,userId:''});
+    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false,writer:{[user.uid]:{username:"Burak R",image:"test",color:"000000"}}});
 
     return (
         <>
@@ -38,7 +44,7 @@ export default function NewBlog() {
                         <Form.Check type="switch" className="ms-auto" label="Anonim olarak paylaş" 
                             onChange={(e) => setInfo({...info, anon: e.target.checked})} checked={info.anon} />
                         <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{letterSpacing: "0.1rem"}} 
-                            onClick={() => saveBlog({...info, userId: user.uid})}>Yayınla</Button>
+                            onClick={() => saveBlog({...info, writer:{[user.uid]:{username:"Burak R",image:"test",color:"000000"}}})}>Yayınla</Button>
                     </Stack>
                 </Card.Footer>
             </Card>

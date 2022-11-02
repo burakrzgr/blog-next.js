@@ -1,11 +1,17 @@
 export type Blog = {
-    blogId: string
+    blogId: string,
     header: string,
-    writer: string,
+    writer: BlogWriter,
     content: string,
     community: CommunityInfo
 }
 
+
+export type BlogWriter = {
+    username:string,
+    image:string,
+    color:string
+}
 
 export type CommunityInfo = {
     likes: number,
@@ -23,5 +29,5 @@ export type CreateBlog = {
     header: string,
     content: string,
     anon: boolean,
-    userId: string
+    writer: any
 }
