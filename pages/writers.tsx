@@ -1,6 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { InterestDisplay } from '../components/interest-display';
 import { database } from '../config/firebase-config';
 import styles from '../styles/Home.module.css'
 
@@ -29,7 +30,7 @@ export default function Writers ({}) {
                     <Row className='border myborder m-2 p-2'>
                         <Col sm={12} lg={4}>{x.writerId}</Col>
                         <Col sm={12} lg={4}>{x.nickname}</Col>
-                        <Col sm={12} lg={4}>{x.interests}</Col>
+                        <Col sm={12} lg={4}><InterestDisplay interests={x.interests}></InterestDisplay></Col>
                     </Row>
             </div>)})}
         </Container>
