@@ -27,7 +27,6 @@ export default function NewBlog() {
     useEffect(() => {
         if(user.uid){
             let q = query(collection(database, 'writers'), where("userId",'==',user.uid), limit(1));
-
             getDocs(q)
                 .then((data) => {
                     data.docs.length > 0 ?
