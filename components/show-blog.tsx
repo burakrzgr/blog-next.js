@@ -5,7 +5,6 @@ import CommunityAction from "./community-action";
 export default function ShowBlog({blog}:{blog:Blog}) {
     return (
         <>
-        {console.log("t",Object.values(blog.writer)[0])}
             <Card border="secondary" >
                 <Card.Header>
                     <Stack direction="horizontal" >
