@@ -14,7 +14,7 @@ export default function NewBlog({updateId}:{updateId?:string}) {
     const { user } = useAuth();
     const [info, setInfo] = useState<CreateBlog>({ header: "", content: "", anon: false, writer: { [user.uid]: { username: "Anon", image: "test", color: "000000" } } });
     const [writer, setWriter] = useState<BlogWriter>({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
-    const [update, setUpdate] = useState({update:updateId != null,updateId:updateId??''});
+    const [update, setUpdate] = useState({update:updateId !== undefined,updateId:updateId??''});
 
     useEffect(() => {
         if (user.uid) {

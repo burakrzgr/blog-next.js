@@ -7,7 +7,7 @@ export default function NewBlogPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <NewBlog updateId={null} />
+                <NewBlog updateId={undefined} />
             </Container>
         </main>
     );
