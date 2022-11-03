@@ -1,18 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
-import { CreateBlog } from "../types/blog";
+import { BlogWriter, CreateBlog } from "../types/blog";
 import { database } from '../config/firebase-config';
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore'
 import { useAuth } from "../context/auth-context";
 
 const dbInstance = collection(database, 'blogs');
 
-
-
     
 const saveBlog = (data: CreateBlog) => {
-    console.log(data.writer)
-
     addDoc(dbInstance,
         { content: data.content, header: data.header, writer: 
             data.anon?
@@ -25,8 +21,24 @@ const saveBlog = (data: CreateBlog) => {
 
 export default function NewBlog() {
     const {user} = useAuth();
-    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false,writer:{[user.uid]:{username:"Burak R",image:"test",color:"000000"}}});
+    const [info, setInfo] = useState<CreateBlog>({header:"",content:"",anon:false,writer:{[user.uid]:{username:"Anon",image:"test",color:"000000"}}});
+    const [writer, setWriter] = useState<BlogWriter>({userId:'RxrvSA0ZawSjanoiUYPhUW6dCu93',username:"Anon",image:"test",color:"000000"}); 
 
+    useEffect(() => {
+        if(user.uid){
+            let q = query(collection(database, 'writers'), where("userId",'==',user.uid), limit(1));
+
+            getDocs(q)
+                .then((data) => {
+                    console.log(data.docs[0].data() as BlogWriter);
+                    data.docs.length > 0 ?
+                        setWriter(data.docs[0].data() as BlogWriter):
+                        setWriter({userId:'RxrvSA0ZawSjanoiUYPhUW6dCu93',username:"Anon",image:"test",color:"000000"});
+                });
+        }
+
+    }, [])
+    
     return (
         <>
             <Card border="danger" >
@@ -44,7 +56,7 @@ export default function NewBlog() {
                         <Form.Check type="switch" className="ms-auto" label="Anonim olarak paylaş" 
                             onChange={(e) => setInfo({...info, anon: e.target.checked})} checked={info.anon} />
                         <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{letterSpacing: "0.1rem"}} 
-                            onClick={() => saveBlog({...info, writer:{[user.uid]:{username:"Burak R",image:"test",color:"000000"}}})}>Yayınla</Button>
+                            onClick={() => saveBlog({...info, writer:{[writer.userId]:writer}})}>Yayınla</Button>
                     </Stack>
                 </Card.Footer>
             </Card>
