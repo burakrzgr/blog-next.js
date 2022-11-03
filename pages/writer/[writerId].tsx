@@ -5,11 +5,12 @@ import { Badge, Container } from "react-bootstrap";
 import { database } from "../../config/firebase-config";
 import { useAuth } from "../../context/auth-context";
 import styles from '../../styles/Home.module.css'
-import { BlogWriter } from "../../types/blog";
+import { Blog, BlogWriter } from "../../types/blog";
 
 
 export default function WriterInfo({ }) {
-    const [writer, setWriter] = useState<BlogWriter>({userId:'',color:'5600F2',image:'Non',username:'Loading'})
+    const [writer, setWriter] = useState<BlogWriter>({userId:'',color:'5600F2',image:'Non',username:'Loading'});
+    const [blogs , setBlogs] = useState<Blog[]>([]);
     const router = useRouter();
     const {user} = useAuth();
     const { writerId } = router.query;
