@@ -30,7 +30,6 @@ export default function NewBlog() {
 
             getDocs(q)
                 .then((data) => {
-                    console.log(data.docs[0].data() as BlogWriter);
                     data.docs.length > 0 ?
                         setWriter(data.docs[0].data() as BlogWriter):
                         setWriter({userId:'RxrvSA0ZawSjanoiUYPhUW6dCu93',username:"Anon",image:"test",color:"000000"});
