@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth-context";
 import { Blog, BlogWriter } from "../types/blog";
 import CommunityAction from "./community-action";
 import { AiOutlineEdit } from 'react-icons/ai';
+import Router from "next/router";
 
 export default function ShowBlog({blog}:{blog:Blog}) {
     const { user } = useAuth();
@@ -19,7 +20,7 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                             <p className="text-secondary ms-auto p-0 m-0">{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>
                         </Stack>
                         {Object.keys(blog.writer)[0] === user.uid ?
-                            <Button variant="warning" className="ms-2 m-0 p-1 ps-2 pe-2 h-100" onClick={() => alert("edit")}>
+                            <Button variant="warning" className="ms-2 m-0 p-1 ps-2 pe-2 h-100" onClick={() => Router.push(`/edit/${blog.blogId}`)}>
                                 <AiOutlineEdit></AiOutlineEdit>
                             </Button>:
                             <></>}
