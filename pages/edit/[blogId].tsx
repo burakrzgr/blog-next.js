@@ -19,6 +19,7 @@ export default function EditBlog({ }) {
         getDoc(docRef)
             .then((data) => {
                 setBlog(data.data() as CreateBlog);
+                console.log(data.data() as CreateBlog);
             });
     }, [])
 

@@ -12,7 +12,7 @@ const dbInstance = collection(database, 'blogs');
 
 export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
-    const [info, setInfo] = useState<CreateBlog>(editBlog);
+    const [info, setInfo] = useState<CreateBlog>(editBlog);//{blogId:editBlog.blogId,content:editBlog.content });
     const [writer, setWriter] = useState<BlogWriter>({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
     const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
 
@@ -27,7 +27,7 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                         setWriter({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
                 });
         }
-
+        setInfo(editBlog);
     }, []);
 
     const saveBlog = (data: CreateBlog) => {
@@ -66,6 +66,8 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
 
     return (
         <>
+        {console.log("e",editBlog)}
+        {console.log("i",info)}
             <Card border="danger" >
                 <Card.Header>
                     <Card.Subtitle className="mb-2 mt-2 text-muted">Başlık</Card.Subtitle>
