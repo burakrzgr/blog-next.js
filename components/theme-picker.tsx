@@ -10,7 +10,7 @@ const setTheme = (value:string) => {
 function ThemePicker({selected}:{selected:string}) {
   const [value,setValue] = useState<string>(selected);
   return (
-    <DropdownButton id="dropdown-basic-button" title="Change Theme" variant='light'>
+    <DropdownButton id="dropdown-basic-button" title="Temayı Değiştir" variant='light'>
       <Dropdown.Item onClick={() => setTheme("vapor")}>Vapor</Dropdown.Item>
       <Dropdown.Item onClick={() => setTheme("darkly")}>Darkly</Dropdown.Item>
       <Dropdown.Item onClick={() => setTheme("sketchy")}>Sketchy</Dropdown.Item>
