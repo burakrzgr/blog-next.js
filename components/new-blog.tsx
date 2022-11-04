@@ -27,8 +27,11 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                         setWriter({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
                 });
         }
-        setInfo(editBlog);
     }, []);
+    useEffect(() => {
+        setInfo(editBlog);
+    }, [editBlog])
+    
 
     const saveBlog = (data: CreateBlog) => {
         const response = toast.promise(
@@ -66,8 +69,6 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
 
     return (
         <>
-        {console.log("e",editBlog)}
-        {console.log("i",info)}
             <Card border="danger" >
                 <Card.Header>
                     <Card.Subtitle className="mb-2 mt-2 text-muted">Başlık</Card.Subtitle>
