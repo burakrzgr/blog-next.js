@@ -12,7 +12,7 @@ const dbInstance = collection(database, 'blogs');
 
 export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
-    const [info, setInfo] = useState<CreateBlog>(editBlog);//{blogId:editBlog.blogId,content:editBlog.content });
+    const [info, setInfo] = useState<CreateBlog>(editBlog);
     const [writer, setWriter] = useState<BlogWriter>({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
     const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
 
