@@ -26,13 +26,13 @@ export default function ReadBlogsPage({ }) {
         <main className={styles.main} >
             <Container className={styles.container}>
                 {blogs.load?
-                blogs.blog.map((blog, key) => {
-                    return (
-                        <div className="pb-5" key={key}>
-                            <ShowBlog blog={blog}></ShowBlog>
-                        </div>
-                    );
-                }
+                    blogs.blog.map((blog, key) => {
+                        return (
+                            <div className="pb-5" key={key}>
+                                <ShowBlog blog={blog}></ShowBlog>
+                            </div>
+                        );
+                    }
                 ):<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
             </Container>
         </main>
