@@ -7,7 +7,7 @@ export default function NewBlogPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <NewBlog updateId={undefined} />
+                <NewBlog editBlog={{ header: "", content: "", anon: false, writer: { }}} />
             </Container>
         </main>
     );

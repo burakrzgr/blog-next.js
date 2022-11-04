@@ -10,11 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const dbInstance = collection(database, 'blogs');
 
-export default function NewBlog({updateId}:{updateId?:string}) {
+export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
-    const [info, setInfo] = useState<CreateBlog>({ header: "", content: "", anon: false, writer: { [user.uid]: { username: "Anon", image: "test", color: "000000" } } });
+    const [info, setInfo] = useState<CreateBlog>(editBlog);
     const [writer, setWriter] = useState<BlogWriter>({ userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000" });
-    const [update, setUpdate] = useState({update:updateId !== undefined,updateId:updateId??''});
+    const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
+
 
     useEffect(() => {
         if (user.uid) {
@@ -68,11 +69,11 @@ export default function NewBlog({updateId}:{updateId?:string}) {
             <Card border="danger" >
                 <Card.Header>
                     <Card.Subtitle className="mb-2 mt-2 text-muted">Başlık</Card.Subtitle>
-                    <Form.Control placeholder="Yeni Bloğunun Başlığı" onChange={(e) => setInfo({ ...info, header: e.target.value })}></Form.Control>
+                    <Form.Control placeholder="Yeni Bloğunun Başlığı" value={info.header} onChange={(e) => setInfo({ ...info, header: e.target.value })}></Form.Control>
                 </Card.Header>
                 <Card.Body>
                     <Card.Subtitle className="mb-2 text-muted">İçerik</Card.Subtitle>
-                    <Form.Control as="textarea" rows={15} placeholder="İşte aradığın fırsat, hadi ilginç birşeyler yaz..."
+                    <Form.Control as="textarea" rows={15} placeholder="İşte aradığın fırsat, hadi ilginç birşeyler yaz..." value={info.content}
                         onChange={(e) => setInfo({ ...info, content: e.target.value })}></Form.Control>
                 </Card.Body>
                 <Card.Footer className="pb-3 ">

@@ -27,6 +27,7 @@ export type Comment = {
     date: any
 }
 export type CreateBlog = {
+    blogId?:string,
     header: string,
     content: string,
     anon: boolean,
