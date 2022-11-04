@@ -1,10 +1,14 @@
-import { Card, Stack } from "react-bootstrap";
+import { Button, Card, Stack } from "react-bootstrap";
+import { useAuth } from "../context/auth-context";
 import { Blog, BlogWriter } from "../types/blog";
 import CommunityAction from "./community-action";
+import { AiOutlineEdit } from 'react-icons/ai';
 
 export default function ShowBlog({blog}:{blog:Blog}) {
+    const { user } = useAuth();
     return (
-        <>
+       
+        <> { }
             <Card border="secondary" >
                 <Card.Header>
                     <Stack direction="horizontal" >
@@ -14,6 +18,11 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                             <p className="text-muted ms-auto p-0 m-0">Yazar</p>    
                             <p className="text-secondary ms-auto p-0 m-0">{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>
                         </Stack>
+                        {Object.keys(blog.writer)[0] === user.uid ?
+                            <Button variant="warning" className="ms-2 m-0 p-1 ps-2 pe-2 h-100" onClick={() => alert("edit")}>
+                                <AiOutlineEdit></AiOutlineEdit>
+                            </Button>:
+                            <></>}
                     </Stack>
                 </Card.Header>
                 <Card.Body>
