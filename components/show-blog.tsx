@@ -8,8 +8,7 @@ import Router from "next/router";
 export default function ShowBlog({blog}:{blog:Blog}) {
     const { user } = useAuth();
     return (
-       
-        <> { }
+        <>
             <Card border="secondary" >
                 <Card.Header>
                     <Stack direction="horizontal" >

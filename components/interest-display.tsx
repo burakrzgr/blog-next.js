@@ -10,10 +10,10 @@ const interestTranslate: CompMap = {
     'drama' : <Badge bg='warning'>Drama</Badge>,
   };
 
-export const InterestDisplay = ({interests}:{interests:string}) => {
+export const InterestDisplay = ({interests}:{interests?:string}) => {
   return (
     <Stack direction='horizontal'>
-        {interests.split(';').map((x,ix) => {return <div key={ix}>{interestTranslate[x]??<Badge>[{x}]</Badge>}</div>})}
+        {interests?interests.split(';').map((x,ix) => {return <div key={ix}>{interestTranslate[x]??<Badge>[{x}]</Badge>}</div>}):<></>}
     </Stack>
   )
 }
