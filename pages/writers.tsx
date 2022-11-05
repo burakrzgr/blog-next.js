@@ -19,8 +19,6 @@ export default function Writers ({}) {
     const getData = () => {
         getDocs(dbInstance)
             .then((data) => {
-                
-                //data.docs.map(x => console.log({...x.data(),community:{...x.data().community, comments: [...x.data().community.comments.value] }} as Blog));
                 setWriters({load:true,users:data.docs.map(x => { return {writerId:x.id,...x.data()} as any })});
             });
     }
