@@ -25,7 +25,7 @@ export default function WriterInfo({ }) {
     }, [])
 
     return (
-        <main className={styles.main}>
+        <main className={styles.profile}>
             <Row className="w-75" style={{minHeight:'75vh !important'}}>
                 <Col xs={12} sm={3}>
                     <ProfileCard writer={writer}></ProfileCard>
