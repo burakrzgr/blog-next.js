@@ -3,35 +3,30 @@ import { useEffect, useState } from 'react';
 import { database } from '../config/firebase-config';
 import { Blog } from '../types/blog';
 import ShowBlog from './show-blog';
+import ShowBlogList, { ShowBlogProps } from './show-blog-list';
 
 const dbInstance = collection(database, 'blogs');
 
-export default function WriterBlog ({blogs:blogprop}: {blogs:string[]}) {
-    const [blogs, setBlogs] = useState<{load:boolean,message:string,blog:Blog[]}>({load:false,message:'',blog:[]});
+export default function WriterBlog ({blogs:blogprop}: {blogs?:string[]}) {
+    const [blogs, setBlogs] = useState<ShowBlogProps>({load:false,blog:[]});
     useEffect(() => {
-        if(blogprop.length>0){
-            let q2 = query(dbInstance,where(documentId(),'in',blogprop))
-            getDocs(q2).then((dat2) => {
-                setBlogs({load:true,message:'',blog:dat2.docs.map(x => { 
-                    return {blogId:x.id,...x.data()} as Blog })});
-            });
-        }
+        if(blogprop)
+            if(blogprop.length>0){
+                console.log(blogprop.length)
+                let q2 = query(dbInstance,where(documentId(),'in',blogprop))
+                getDocs(q2).then((dat2) => {
+                    setBlogs({load:true,blog:dat2.docs.map(x => { 
+                        return {blogId:x.id,...x.data()} as Blog })});
+                });
+            }
+            else{
+                setBlogs({load:true,message:'Burda bişey yok :/',blog:[]});
+            }
     }, [blogprop])
     
     return (
         <>
-            {blogs.load?
-                <>
-                <div>{blogs.message}</div>
-                {blogs.blog.map((blog, key) => {
-                    return (
-                        <div className="pb-5" key={key}>
-                            <ShowBlog blog={blog}></ShowBlog>
-                        </div>
-                    );
-                })}
-                </>
-            :<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
+            <ShowBlogList blogs={blogs}></ShowBlogList>
         </>
     );
 }

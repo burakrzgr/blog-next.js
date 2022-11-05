@@ -23,7 +23,6 @@ export default function MyBlogsPage({ }) {
             if(data.docs.length > 0)
             {
                 let miblog = (data.docs[0].data().blogs as string[]);
-                console.log("mi",miblog);
                 let q2 = query(dbInstance,where(documentId(),'in',miblog))
                 
 

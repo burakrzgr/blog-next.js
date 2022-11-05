@@ -12,7 +12,7 @@ export type BlogWriter = {
     username:string,
     image:string,
     color:string,
-    blogs:string[],
+    blogs?:string[],
     interests?:string,
     desc:string
 }
