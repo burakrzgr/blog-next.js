@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import ShowBlog from "../components/show-blog";
 import styles from '../styles/Home.module.css'
 import { database } from '../config/firebase-config';
-import { getDocs, collection, where, query, limit, getDoc, doc } from 'firebase/firestore'
+import { getDocs, collection, where, query, limit, getDoc, doc, FieldPath, documentId } from 'firebase/firestore'
 import { Blog, BlogWriter } from "../types/blog";
 import { useAuth } from "../context/auth-context";
 
@@ -14,28 +14,29 @@ export default function MyBlogsPage({ }) {
   const [blogs, setBlogs] = useState<{load:boolean,message:string,blog:Blog[]}>({load:false,message:'',blog:[]});
     useEffect(() => {
         getData();
-    }, []);
+    }, [user.uid]);
 
     const getData = () => {
-      if (user.uid) {
-        let q = query(collection(database, 'blogs'), where("writer", 'array-contains-any', user.uid), limit(10));
-        getDocs(q)
-                .then((data) => {
-                    alert(data.docs);
-                }).catch(ex => console.log(ex));
-        /*getDoc(doc(database,'writers',user.uid))
-            .then((data) => {
-           
-            getDocs(q)
-                .then((data) => {
-                    setBlogs({load:true,message:'',blog:data.docs.map(x => { 
+        
+       user.uid
+      if (user.uid) { 
+        console.log("mi");
+        let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
+        getDocs(q).then((data) => {
+            if(data.docs.length > 0)
+            {
+                let miblog = (data.docs[0].data().blogs as string[]);
+                console.log("mi",miblog);
+                let q2 = query(dbInstance,where(documentId(),'in',miblog))
+                
+
+                getDocs(q2).then((dat2) => {
+                    setBlogs({load:true,message:'',blog:dat2.docs.map(x => { 
                         return {blogId:x.id,...x.data()} as Blog })});
                 });
-
-
-        });*/
-
-          
+            
+            }
+        }).catch(ex => console.log(ex));
       }
       else{
 
