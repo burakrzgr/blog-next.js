@@ -4,11 +4,13 @@ const noPhoto = {
     backgroundImage: "url('/img/no-profile-photo.png')"
 }
 
-export default function ProfilePhotoDisplay({ link }: { link: string }) {
+export default function ProfilePhotoDisplay({ link }: { link?: string }) {
     return (
         <div className='d-flex justify-content-center'>
-            <div className={styles.useImg + ' w-75'} style={{ aspectRatio: '1/1', ...noPhoto }}>
-            </div>
+            {link?
+                <div className={styles.useImg + ' w-75'} style={{ aspectRatio: '1/1', backgroundImage:link }}></div>:
+                <div className={styles.useImg + ' w-75'} style={{ aspectRatio: '1/1', ...noPhoto }}></div>
+            }
         </div>
     );
 }
