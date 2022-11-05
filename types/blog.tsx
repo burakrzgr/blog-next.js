@@ -12,7 +12,8 @@ export type BlogWriter = {
     username:string,
     image:string,
     color:string,
-    blogs:string[]
+    blogs:string[],
+    desc:string
 }
 
 export type CommunityInfo = {

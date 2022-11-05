@@ -11,7 +11,7 @@ import { BlogWriter } from "../../types/blog";
 
 
 export default function WriterInfo({ }) {
-    const [writer, setWriter] = useState<BlogWriter>({userId:'',color:'5600F2',image:'Non',username:'Loading',blogs:[]});
+    const [writer, setWriter] = useState<BlogWriter>({userId:'',color:'5600F2',image:'Non',username:'Loading',blogs:[],desc:''});
     const router = useRouter();
     const {user} = useAuth();
     const { writerId } = router.query;
@@ -42,7 +42,7 @@ export default function WriterInfo({ }) {
                         <p>{writerId}</p>
                     </Col>
                     <Col xs={12} sm={9}>
-                        <WriterBlog writer={writer}></WriterBlog>
+                        <WriterBlog blogs={writer.blogs}></WriterBlog>
                     </Col>
                 </Row>
             </Container>

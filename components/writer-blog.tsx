@@ -6,17 +6,17 @@ import ShowBlog from './show-blog';
 
 const dbInstance = collection(database, 'blogs');
 
-export default function WriterBlog ({writer}: {writer:BlogWriter}) {
+export default function WriterBlog ({blogs:blogprop}: {blogs:string[]}) {
     const [blogs, setBlogs] = useState<{load:boolean,message:string,blog:Blog[]}>({load:false,message:'',blog:[]});
     useEffect(() => {
-        if(writer.blogs.length>0){
-            let q2 = query(dbInstance,where(documentId(),'in',writer.blogs))
+        if(blogprop.length>0){
+            let q2 = query(dbInstance,where(documentId(),'in',blogprop))
             getDocs(q2).then((dat2) => {
                 setBlogs({load:true,message:'',blog:dat2.docs.map(x => { 
                     return {blogId:x.id,...x.data()} as Blog })});
             });
         }
-    }, [writer.blogs])
+    }, [blogprop])
     
     return (
         <>
