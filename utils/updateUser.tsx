@@ -5,7 +5,7 @@ import { database } from "../config/firebase-config";
 type updateUserType ={
     username:string,
     desc:string,
-    link:string,
+    image:string,
     userId:string,
     interests:string,
     blogs:string[]

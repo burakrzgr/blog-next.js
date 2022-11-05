@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
               username: username,
               userId:user.user.uid,
               desc:'',
-              link:'',
+              image:'',
               interests:'',
               blogs:[]
             });
