@@ -7,7 +7,7 @@ import ShowBlogList, { ShowBlogProps } from './show-blog-list';
 
 const dbInstance = collection(database, 'blogs');
 
-export default function WriterBlog ({blogs:blogprop}: {blogs?:string[]}) {
+export default function ProfileWriter ({blogs:blogprop}: {blogs?:string[]}) {
     const [blogs, setBlogs] = useState<ShowBlogProps>({load:false,blog:[]});
     useEffect(() => {
         if(blogprop)

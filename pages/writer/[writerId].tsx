@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import ProfileCard from "../../components/profile-card";
-import WriterBlog from "../../components/writer-blog";
+import ProfileWriter from "../../components/profile-writer";
 import { database } from "../../config/firebase-config";
 import styles from '../../styles/Home.module.css'
 import { BlogWriter } from "../../types/blog";
@@ -37,7 +37,7 @@ export default function WriterInfo({ }) {
                         className="mb-3"
                     >
                         <Tab eventKey="blogs" title="Yazdığı Bloglar">
-                            <WriterBlog blogs={writer.blogs}></WriterBlog>
+                            <ProfileWriter blogs={writer.blogs}></ProfileWriter>
                         </Tab>
                         <Tab eventKey="edit" title="Profili Düzenle">
                             <>Edit options</>
