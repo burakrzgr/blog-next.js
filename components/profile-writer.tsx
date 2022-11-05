@@ -12,7 +12,6 @@ export default function ProfileWriter ({blogs:blogprop}: {blogs?:string[]}) {
     useEffect(() => {
         if(blogprop)
             if(blogprop.length>0){
-                console.log(blogprop.length)
                 let q2 = query(dbInstance,where(documentId(),'in',blogprop))
                 getDocs(q2).then((dat2) => {
                     setBlogs({load:true,blog:dat2.docs.map(x => { 

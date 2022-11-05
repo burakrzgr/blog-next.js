@@ -5,11 +5,12 @@ import styles from '../styles/Home.module.css'
 import { database } from '../config/firebase-config';
 import { getDocs, collection } from 'firebase/firestore'
 import { Blog } from "../types/blog";
+import ShowBlogList, { ShowBlogProps } from "../components/show-blog-list";
 
 const dbInstance = collection(database, 'blogs');
 
 export default function ReadBlogsPage({ }) {
-    const [blogs, setBlogs] = useState<{load:boolean,blog:Blog[]}>({load:false,blog:[]});
+    const [blogs, setBlogs] = useState<ShowBlogProps>({load:false,blog:[]});
     useEffect(() => {
         getData();
     }, []);
@@ -25,15 +26,7 @@ export default function ReadBlogsPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                {blogs.load?
-                    blogs.blog.map((blog, key) => {
-                        return (
-                            <div className="pb-5" key={key}>
-                                <ShowBlog blog={blog}></ShowBlog>
-                            </div>
-                        );
-                    }
-                ):<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
+                <ShowBlogList blogs={blogs}></ShowBlogList>
             </Container>
         </main>
     );
