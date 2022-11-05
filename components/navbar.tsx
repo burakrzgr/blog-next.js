@@ -41,7 +41,7 @@ function Navbar({ }) {
                             <a className="nav-link" href="#">Keşfet</a>
                         </li>
                         <li className="nav-item pe-2">
-                            <a className="nav-link" onClick={async() => await Router.push("/myblogs")}>Yazdıklarım</a>
+                            <a className="nav-link" onClick={async() => await Router.push("/myblogs")} role='button'>Yazdıklarım</a>
                         </li>
                     </ul>
                     <div className="pe-4">
