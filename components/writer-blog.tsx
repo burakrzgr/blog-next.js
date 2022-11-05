@@ -1,7 +1,7 @@
 import { collection, documentId, getDocs, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { database } from '../config/firebase-config';
-import { Blog, BlogWriter } from '../types/blog';
+import { Blog } from '../types/blog';
 import ShowBlog from './show-blog';
 
 const dbInstance = collection(database, 'blogs');

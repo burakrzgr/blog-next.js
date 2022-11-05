@@ -2,12 +2,16 @@ import { Badge, Stack } from "react-bootstrap";
 import { useAuth } from "../context/auth-context";
 import { BlogWriter } from "../types/blog";
 import { InterestDisplay } from "./interest-display";
+import ProfilePhotoDisplay from "./profile-photo-display";
 
 
 export default function ProfileCard ({writer}:{writer:BlogWriter}) {
   const {user} = useAuth();
   return (
     <Stack direction="vertical" gap={3}>
+        <div>
+            <ProfilePhotoDisplay link=""></ProfilePhotoDisplay>
+        </div>
         <div>
             <div className="text-end">
                 {writer.userId === user.uid?<Badge bg='info'>Its you :D</Badge>:<Badge bg='danger'>Report</Badge>}

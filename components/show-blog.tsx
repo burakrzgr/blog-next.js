@@ -13,7 +13,6 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                 <Card.Header>
                     <Stack direction="horizontal" >
                         <Card.Title className="mb-2 mt-2"><h3>{blog.header}</h3></Card.Title>
-                        
                         <Stack direction="vertical" className="ms-auto p-0 m-0">
                             <p className="text-muted ms-auto p-0 m-0">Yazar</p>    
                             <p className="text-secondary ms-auto p-0 m-0">{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>

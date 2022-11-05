@@ -118,6 +118,16 @@
   margin-left: 0.5rem;
 }
 
+.useImg {
+  display: inline-block;
+  border-radius: 50%;
+  border: rgb(100, 100, 100) 0.2rem solid;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
