@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useState, useRef, useEffect } from "react";
 import { auth } from "../config/firebase-config";
+import updateUser from "../utils/updateUser";
 
 
 interface AuthProviderInterface {
@@ -30,8 +31,13 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
 
     function signup(email: string, pasword: string, username:string) {
         return createUserWithEmailAndPassword(auth, email, pasword).then((user) => {
-            updateProfile(user.user,{
-              displayName: username
+            updateUser(user.user,{
+              username: username,
+              userId:user.user.uid,
+              desc:'',
+              link:'',
+              interests:'',
+              blogs:[]
             });
         });
     }    
