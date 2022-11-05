@@ -1,7 +1,7 @@
 import { collection, doc, documentId, getDoc, getDocs, limit, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect,useState } from "react";
-import { Badge, Container } from "react-bootstrap";
+import { Badge, Col, Container, Row } from "react-bootstrap";
 import ShowBlog from "../../components/show-blog";
 import { database } from "../../config/firebase-config";
 import { useAuth } from "../../context/auth-context";
@@ -23,8 +23,7 @@ export default function WriterInfo({ }) {
             .then((data) => {
                 setWriter(data.data() as BlogWriter);
 
-                let miblog = (data.data().blogs as string[]);
-                console.log("mi",miblog);
+                let miblog = (data.data()?.blogs as string[]);
                 let q2 = query(dbInstance,where(documentId(),'in',miblog))
                 getDocs(q2).then((dat2) => {
                     setBlogs({load:true,message:'',blog:dat2.docs.map(x => { 
@@ -37,8 +36,6 @@ export default function WriterInfo({ }) {
     const getData = () => {
         if (user.uid) { 
           let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
-          
-
         }
       }
 
@@ -48,23 +45,27 @@ export default function WriterInfo({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <h3>{writer.username}</h3>
-                {writer.userId === user.uid?<Badge bg='info'>Its you :D</Badge>:<Badge bg='danger'>Report</Badge>}
-                <p>{writerId}</p>
-
-                {blogs.load?
-                    <>
-                      <div>{blogs.message}</div>
-                      {blogs.blog.map((blog, key) => {
-                        return (
-                            <div className="pb-5" key={key}>
-                                <ShowBlog blog={blog}></ShowBlog>
-                            </div>
-                        );
-                      })}
-                    </>
-                :<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
-
+                <Row>
+                    <Col col={3}>
+                        <h3>{writer.username}</h3>
+                        {writer.userId === user.uid?<Badge bg='info'>Its you :D</Badge>:<Badge bg='danger'>Report</Badge>}
+                        <p>{writerId}</p>
+                    </Col>
+                    <Col col={9}>
+                        {blogs.load?
+                            <>
+                            <div>{blogs.message}</div>
+                            {blogs.blog.map((blog, key) => {
+                                return (
+                                    <div className="pb-5" key={key}>
+                                        <ShowBlog blog={blog}></ShowBlog>
+                                    </div>
+                                );
+                            })}
+                            </>
+                        :<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
+                    </Col>
+                </Row>
             </Container>
         </main>
     );
