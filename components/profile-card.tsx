@@ -10,7 +10,7 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
   return (
     <Stack direction="vertical" gap={3}>
         <div>
-            <ProfilePhotoDisplay link=""></ProfilePhotoDisplay>
+            <ProfilePhotoDisplay link={writer.image}></ProfilePhotoDisplay>
         </div>
         <div>
             <div className="text-end">
