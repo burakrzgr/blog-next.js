@@ -17,10 +17,7 @@ export default function MyBlogsPage({ }) {
     }, [user.uid]);
 
     const getData = () => {
-        
-       user.uid
       if (user.uid) { 
-        console.log("mi");
         let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
         getDocs(q).then((data) => {
             if(data.docs.length > 0)
@@ -37,9 +34,6 @@ export default function MyBlogsPage({ }) {
             
             }
         }).catch(ex => console.log(ex));
-      }
-      else{
-
       }
     }
 
