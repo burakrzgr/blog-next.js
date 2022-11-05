@@ -6,12 +6,13 @@ import { database } from '../config/firebase-config';
 import { getDocs, collection, where, query, limit, getDoc, doc, FieldPath, documentId } from 'firebase/firestore'
 import { Blog, BlogWriter } from "../types/blog";
 import { useAuth } from "../context/auth-context";
+import ShowBlogList, { ShowBlogProps } from "../components/show-blog-list";
 
 const dbInstance = collection(database, 'blogs');
 
 export default function MyBlogsPage({ }) {
   const { user } = useAuth();  
-  const [blogs, setBlogs] = useState<{load:boolean,message:string,blog:Blog[]}>({load:false,message:'',blog:[]});
+  const [blogs, setBlogs] = useState<ShowBlogProps>({load:false,blog:[]});
     useEffect(() => {
         getData();
     }, [user.uid]);
@@ -23,13 +24,16 @@ export default function MyBlogsPage({ }) {
             if(data.docs.length > 0)
             {
                 let miblog = (data.docs[0].data().blogs as string[]);
-                let q2 = query(dbInstance,where(documentId(),'in',miblog))
-                
-
-                getDocs(q2).then((dat2) => {
-                    setBlogs({load:true,message:'',blog:dat2.docs.map(x => { 
-                        return {blogId:x.id,...x.data()} as Blog })});
-                });
+                if(miblog.length > 0){
+                    let q2 = query(dbInstance,where(documentId(),'in',miblog))
+                    getDocs(q2).then((dat2) => {
+                        setBlogs({load:true,blog:dat2.docs.map(x => { 
+                            return {blogId:x.id,...x.data()} as Blog })});
+                    });
+                }
+                else{
+                    setBlogs({load:true,message:'Ee bişey yazmamışsın ki !!!',blog:[]});
+                }
             
             }
         }).catch(ex => console.log(ex));
@@ -39,18 +43,7 @@ export default function MyBlogsPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                {blogs.load?
-                    <>
-                      <div>{blogs.message}</div>
-                      {blogs.blog.map((blog, key) => {
-                        return (
-                            <div className="pb-5" key={key}>
-                                <ShowBlog blog={blog}></ShowBlog>
-                            </div>
-                        );
-                      })}
-                    </>
-                :<h3 className="text-center">Az bi bekle. Yüklüyoz.</h3>}
+                <ShowBlogList blogs={blogs}></ShowBlogList>
             </Container>
         </main>
     );
