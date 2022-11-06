@@ -8,13 +8,15 @@ import { count } from 'console';
 export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
     const [followInfo, setFollowInfo] = useState({load:false,follower:0,following:0});
     useEffect(() => {
-        let q = query(collection(database, 'writers'), where("follower", '==', writerUserId));
+        console.log(writerUserId)
+        let q = query(collection(database, 'favs'), where("follower", '==', 'writers/'+writerUserId));
         const snapshot = getCountFromServer(q);
-        
+
         snapshot.then((x) => {
+            console.log(x);
             setFollowInfo({...followInfo,following:x.data().count});
         })
-        
+        console.log(followInfo);
         //console.log('count: ', snapshot.data().count);
 
     }, [writerUserId])
