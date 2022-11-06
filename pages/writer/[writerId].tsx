@@ -21,7 +21,6 @@ export default function WriterInfo({ }) {
         getDoc(docRef)
             .then((data) => {
                 setWriter({...data.data() as BlogWriter,id : data.id});
-                console.log('my',writer)
             });
 
          
