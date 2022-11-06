@@ -18,26 +18,22 @@ export default function MyBlogsPage({ }) {
     }, [user.uid]);
 
     const getData = () => {
-      if (user.uid) { 
-        let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
-        getDocs(q).then((data) => {
-            if(data.docs.length > 0)
-            {
-                let miblog = (data.docs[0].data().blogs as string[]);
-                if(miblog.length > 0){
-                    let q2 = query(dbInstance,where(documentId(),'in',miblog))
-                    getDocs(q2).then((dat2) => {
-                        setBlogs({load:true,blog:dat2.docs.map(x => { 
-                            return {blogId:x.id,...x.data()} as Blog })});
+        if (user.writerId) {
+            let miblog = (user.blogs as string[]);
+            if (miblog.length > 0) {
+                let q2 = query(dbInstance, where(documentId(), 'in', miblog))
+                getDocs(q2).then((dat2) => {
+                    setBlogs({
+                        load: true, blog: dat2.docs.map(x => {
+                            return { blogId: x.id, ...x.data() } as Blog
+                        })
                     });
-                }
-                else{
-                    setBlogs({load:true,message:'Ee bişey yazmamışsın ki !!!',blog:[]});
-                }
-            
+                });
             }
-        }).catch(ex => console.log(ex));
-      }
+            else {
+                setBlogs({ load: true, message: 'Ee bişey yazmamışsın ki !!!', blog: [] });
+            }
+        }
     }
 
     return (
