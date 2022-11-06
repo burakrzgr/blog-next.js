@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { createRef, useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
 import { Comment, CommunityInfo } from "../types/blog";
