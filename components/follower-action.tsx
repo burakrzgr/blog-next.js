@@ -5,30 +5,33 @@ import { collection, getCountFromServer, query, where } from 'firebase/firestore
 import { database } from '../config/firebase-config';
 
 export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
+    const { user } = useAuth();
     const [followInfo, setFollowInfo] = useState<{follower:number,followed:number,youFollow?:boolean}>({follower:0,followed:0,youFollow:undefined});
     
     async function findFollower(column:string) {
         let q = query(collection(database, 'favs'), where(column, '==', writerUserId));
         const snapshot = getCountFromServer(q);
         return (await snapshot).data().count;
-        /*snapshot.then((x) => {
-            setFollowInfo({...followInfo,[column]:x.data().count});
-        });*/
     }
     
+    async function findIfYouFollow() {
+        let q = query(collection(database, 'favs'), where('followed', '==', writerUserId), where('follower', '==', user.writerId));
+        const snapshot = getCountFromServer(q);
+        return (await snapshot).data().count > 0;
+    }
     
     
     useEffect(() => {
         findFollower('follower').then(x => {
-            //setFollowInfo({ ...followInfo,});
             findFollower('followed').then(y => {
-                setFollowInfo({ ...followInfo,  follower: x ,followed: y });
+                findIfYouFollow().then(z => {
+                    setFollowInfo({ follower: x ,followed: y,youFollow: z });
+                });                
             });
         });
-        //findIfYouFollow();
+       
     }, [writerUserId])
     
-    const { user } = useAuth();
     return (
     <Stack direction="horizontal">
         {<div className="link-info" role="button">{followInfo.followed} kişi takipçisi</div>}

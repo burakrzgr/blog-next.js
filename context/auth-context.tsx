@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useState, useRef, useEffect } from "react";
 import { auth } from "../config/firebase-config";
-import updateUser from "../utils/updateUser";
+import {updateUser,getWriter} from "../utils/updateUser";
 
 
 interface AuthProviderInterface {
@@ -50,7 +50,14 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            setUser(user??{});
+            if(user){
+                getWriter(user).then((writer) => {
+                    setUser({...user,...writer});
+                })
+            }
+            else{
+                setUser({});
+            }
             setLoading(false);
         });
         return unsubscribe;
