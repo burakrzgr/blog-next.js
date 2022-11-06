@@ -23,7 +23,7 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
             <InterestDisplay interests={writer.interests}></InterestDisplay>
         </div>
         <div>
-            <FollowerAction writerUserId={writer.userId}></FollowerAction>
+            <FollowerAction writerUserId={writer.id}></FollowerAction>
         </div>
         <div>
             <h6 className="text-muted">Hakkımda</h6>

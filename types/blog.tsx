@@ -8,6 +8,7 @@ export type Blog = {
 
 
 export type BlogWriter = {
+    id:string,
     userId:string,
     username:string,
     image:string,

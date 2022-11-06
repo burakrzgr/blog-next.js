@@ -11,7 +11,7 @@ import { BlogWriter } from "../../types/blog";
 
 
 export default function WriterInfo({ }) {
-    const [writer, setWriter] = useState<BlogWriter>({ userId: '', color: '5600F2', image: '', username: 'Loading', desc: '',blogs:undefined });
+    const [writer, setWriter] = useState<BlogWriter>({ id:'', userId: '', color: '5600F2', image: '', username: 'Loading', desc: '',blogs:undefined });
     const router = useRouter();
     const { writerId } = router.query;
     const [key, setKey] = useState('blogs');
