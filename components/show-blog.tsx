@@ -4,9 +4,15 @@ import { Blog, BlogWriter } from "../types/blog";
 import CommunityAction from "./community-action";
 import { AiOutlineEdit } from 'react-icons/ai';
 import Router from "next/router";
+import { AnonId } from "../config/my-config";
 
 export default function ShowBlog({blog}:{blog:Blog}) {
     const { user } = useAuth();
+    const go=(key:string)=>{
+        if(key && key !== AnonId){
+            Router.push(`/writer/${key}`);
+        }
+    }
     return (
         <>
             <Card border="secondary" >
@@ -15,7 +21,7 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                         <Card.Title className="mb-2 mt-2"><h3>{blog.header}</h3></Card.Title>
                         <Stack direction="vertical" className="ms-auto p-0 m-0">
                             <p className="text-muted ms-auto p-0 m-0">Yazar</p>    
-                            <p className="text-secondary ms-auto p-0 m-0">{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>
+                            <p className="text-secondary ms-auto p-0 m-0" onClick={() => go(Object.keys(blog.writer)[0])}>{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>
                         </Stack>
                         {Object.keys(blog.writer)[0] === user.uid ?
                             <Button variant="warning" className="ms-2 m-0 p-1 ps-2 pe-2 h-100" onClick={() => Router.push(`/edit/${blog.blogId}`)}>
