@@ -3,28 +3,42 @@ import { useAuth } from '../context/auth-context';
 import { useEffect, useState } from "react";
 import { collection, getCountFromServer, query, where } from 'firebase/firestore';
 import { database } from '../config/firebase-config';
-import { count } from 'console';
 
 export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
-    const [followInfo, setFollowInfo] = useState({load:false,follower:0,following:0,youFollow:undefined});
-    useEffect(() => {
-        console.log(writerUserId)
-        let q = query(collection(database, 'favs'), where("follower", '==', writerUserId));
+    const [followInfo, setFollowInfo] = useState<{follower:number,followed:number,youFollow?:boolean}>({follower:0,followed:0,youFollow:undefined});
+    
+    async function findFollower(column:string) {
+        let q = query(collection(database, 'favs'), where(column, '==', writerUserId));
         const snapshot = getCountFromServer(q);
-
-        snapshot.then((x) => {
-            console.log('ss',x);
-            setFollowInfo({...followInfo,follower:x.data().count});
-        })
-        //console.log('count: ', snapshot.data().count);
-
+        return (await snapshot).data().count;
+        /*snapshot.then((x) => {
+            setFollowInfo({...followInfo,[column]:x.data().count});
+        });*/
+    }
+    
+    
+    
+    useEffect(() => {
+        findFollower('follower').then(x => {
+            //setFollowInfo({ ...followInfo,});
+            findFollower('followed').then(y => {
+                setFollowInfo({ ...followInfo,  follower: x ,followed: y });
+            });
+        });
+        //findIfYouFollow();
     }, [writerUserId])
     
     const { user } = useAuth();
     return (
     <Stack direction="horizontal">
-        <div className="link-info" role="button">{followInfo.follower} kişi takipçisi</div><div className="ms-4 link-info" role="button">{followInfo.following} kişiyi takipte</div>
-        {writerUserId === user.uid?<></>:<Button size="sm" variant="danger" className="ms-auto" role="button">Takibe Al</Button>}
+        {<div className="link-info" role="button">{followInfo.followed} kişi takipçisi</div>}
+        {<div className="ms-4 link-info" role="button">{followInfo.follower} kişiyi takipte</div>}
+        {followInfo.youFollow != undefined?
+            (followInfo.youFollow?
+                <Button size="sm" variant="danger" className="ms-auto" role="button">Takipten Çık</Button>:
+                <Button size="sm" variant="danger" className="ms-auto" role="button">Takibe Al</Button>
+            ):
+            <></>}
     </Stack>
   );
 }
