@@ -20,8 +20,11 @@ export default function WriterInfo({ }) {
         let docRef = doc(database, 'writers', writerId as string);
         getDoc(docRef)
             .then((data) => {
-                setWriter(data.data() as BlogWriter);
+                setWriter({...data.data() as BlogWriter,id : data.id});
+                console.log('my',writer)
             });
+
+         
     }, [])
 
     return (
