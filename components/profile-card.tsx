@@ -1,6 +1,7 @@
 import { Badge, Button, Stack } from "react-bootstrap";
 import { useAuth } from "../context/auth-context";
 import { BlogWriter } from "../types/blog";
+import FollowerAction from "./follower-action";
 import { InterestDisplay } from "./interest-display";
 import ProfilePhotoDisplay from "./profile-photo-display";
 
@@ -22,10 +23,7 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
             <InterestDisplay interests={writer.interests}></InterestDisplay>
         </div>
         <div>
-            <Stack direction="horizontal">
-                <div className="link-info" role="button">0 kişi takipçisi</div><div className="ms-4 link-info" role="button">0 kişiyi takipte</div>
-                {writer.userId === user.uid?<></>:<Button size="sm" variant="danger" className="ms-auto" role="button">Takibe Al</Button>}
-            </Stack>
+            <FollowerAction writerUserId={writer.userId}></FollowerAction>
         </div>
         <div>
             <h6 className="text-muted">Hakkımda</h6>
