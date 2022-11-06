@@ -14,9 +14,8 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
 
         snapshot.then((x) => {
             console.log('ss',x);
-            setFollowInfo({...followInfo,following:x.data().count});
+            setFollowInfo({...followInfo,follower:x.data().count});
         })
-        console.log(followInfo);
         //console.log('count: ', snapshot.data().count);
 
     }, [writerUserId])
