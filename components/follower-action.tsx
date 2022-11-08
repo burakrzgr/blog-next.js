@@ -22,13 +22,13 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
     
     
     useEffect(() => {
-        const fetchData = (async () => {
+        (async () => {
             let follower = await findFollower('follower');
             let followed = await findFollower('followed');
-            let youFollow = await findIfYouFollow();
+            let youFollow = user.writerId ? await findIfYouFollow():undefined;
 
             setFollowInfo({ follower,followed,youFollow});
-          })();
+        })();
        
     }, [writerUserId])
     
