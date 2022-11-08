@@ -22,18 +22,18 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
     
     
     useEffect(() => {
-        findFollower('follower').then(x => {
-            findFollower('followed').then(y => {
-                findIfYouFollow().then(z => {
-                    setFollowInfo({ follower: x ,followed: y,youFollow: z });
-                });                
-            });
-        });
+        const fetchData = (async () => {
+            let follower = await findFollower('follower');
+            let followed = await findFollower('followed');
+            let youFollow = await findIfYouFollow();
+
+            setFollowInfo({ follower,followed,youFollow});
+          })();
        
     }, [writerUserId])
     
     return (
-    <Stack direction="horizontal">
+    <Stack direction="horizontal" style={{minHeight:"6rem"}}>
         {<div className="link-info" role="button">{followInfo.followed} kişi takipçisi</div>}
         {<div className="ms-4 link-info" role="button">{followInfo.follower} kişiyi takipte</div>}
         {followInfo.youFollow != undefined?
