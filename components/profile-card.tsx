@@ -13,12 +13,12 @@ const dbInstance = collection(database, 'writers');
 export default function ProfileCard ({writer}:{writer:BlogWriter}) {
   const {user} = useAuth();
   const [editMode, setEditMode] = useState(false);
+  const [desc, setDesc] = useState(writer.desc);
   const saveProfileInfo = (val : string) => {
     setDoc(doc(dbInstance,user.writerId),
-        {
-            "desc": "test"
-        },{merge:true}).then(x => 
-    setEditMode(false));
+        { "desc" : val },
+        { merge : true }).then(x => 
+            setEditMode(false));
   }
 
   return (
@@ -44,8 +44,8 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
         </div>
         <div>
             <h6 className="text-muted">Hakkımda</h6>
-            {editMode?<Form.Control as="textarea" rows={5} value={writer.desc} />:
-            <p>{writer.desc.length>0?writer.desc:<span className="text-muted">Bişey yazmamış :/</span>}</p>}
+            {editMode?<Form.Control as="textarea" rows={5} value={desc} onChange={(x) => setDesc(x.target.value)}/>:
+            <p>{desc.length>0?desc:<span className="text-muted">Bişey yazmamış :/</span>}</p>}
         </div>
     </Stack>
   );
