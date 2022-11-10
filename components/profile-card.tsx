@@ -1,5 +1,5 @@
 import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge, Button, Form, Stack } from "react-bootstrap";
 import { database } from "../config/firebase-config";
 import { useAuth } from "../context/auth-context";
@@ -14,6 +14,12 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
   const {user} = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [desc, setDesc] = useState(writer.desc);
+
+  useEffect(() => {
+    setDesc(writer.desc);
+    setEditMode(false);
+  }, [writer])
+  
   const saveProfileInfo = (val : string) => {
     setDoc(doc(dbInstance,user.writerId),
         { "desc" : val },
@@ -30,7 +36,7 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
             <div className="text-end">
                 {writer.userId === user.uid?
                     (editMode?
-                        <Badge bg='success' role='button' onClick={() => saveProfileInfo(writer.desc)}>Düzenlemeyi Kaydet</Badge>:
+                        <Badge bg='success' role='button' onClick={() => saveProfileInfo(desc)}>Düzenlemeyi Kaydet</Badge>:
                         <Badge bg='info' role='button' onClick={() => setEditMode(true)}>Profilini düzenle</Badge>):
                     <Badge bg='danger' role='button'>Kullanıcıyı Şikayet Et</Badge>}
             </div>
