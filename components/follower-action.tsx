@@ -25,7 +25,7 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
         (async () => {
             let follower = await findFollower('follower');
             let followed = await findFollower('followed');
-            let youFollow = user.writerId ? await findIfYouFollow():undefined;
+            let youFollow = user.writerId !== writerUserId ? await findIfYouFollow():undefined;
 
             setFollowInfo({ follower,followed,youFollow});
         })();
