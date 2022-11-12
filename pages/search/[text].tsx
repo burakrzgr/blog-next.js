@@ -14,8 +14,8 @@ export default function SearchPageKeyword({ }) {
     const [blogs, setBlogs] = useState<ShowBlogProps>({load:false,blog:[]});
     useEffect(() => {
 
-      setBlogs({load:true,blog:[]})
-    }, [])
+        setBlogs({load:true,blog:[]})
+    }, [text])
     
     return (
         <main className={styles.main} >
