@@ -33,13 +33,13 @@ export default function Writers ({}) {
                         <Col sm={12} lg={3}>
                             <ProfilePhotoDisplay link={x.image} />
                         </Col>
-                        <Col sm={12} lg={7}>
+                        <Col sm={12} lg={7} >
                             <Row><h3>{x.username}</h3></Row>
-                            <Row><InterestDisplay interests={x.interests}></InterestDisplay></Row>
-                            <Row>{x.desc}</Row>
+                            <Row className="pt-2 pb-3"><InterestDisplay interests={x.interests}></InterestDisplay></Row>
+                            <Row ><div className="overflow-hidden pb-1" style={{height: "7rem"}}>{x.desc}</div></Row>
                         </Col>
                         <Col sm={12} lg={2}>
-                            <Button variant="dark" className='w-100 h-100 p-3' onClick={async () => await Router.push(`/writer/${x.id}`)}>Görüntüle</Button>
+                            <Button variant="dark" size='lg' className='w-100 h-100 p-3' onClick={async () => await Router.push(`/writer/${x.id}`)}>Görüntüle</Button>
                         </Col>
                     </Row>
             </div>)})}
