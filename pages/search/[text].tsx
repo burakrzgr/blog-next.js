@@ -27,7 +27,7 @@ export default function SearchPageKeyword({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <h5>Arama metini "{text}" için {blogs?.blog?.length??0} sonuç bulundu.</h5>
+                <h5>{"Arama metini \""}{text}{"\" için "}{blogs?.blog?.length??0} sonuç bulundu.</h5>
                 <ShowBlogList blogs={blogs}></ShowBlogList>
             </Container>
         </main>

@@ -20,7 +20,7 @@ export default function EditBlog({ }) {
             .then((data) => {
                 setBlog(data.data() as CreateBlog);
             });
-    }, [])
+    }, [blogId])
 
     return (
         <main className={styles.main} >
