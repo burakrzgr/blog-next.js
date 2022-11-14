@@ -1,14 +1,21 @@
-import { useRouter } from "next/router";
-import { Container, Form } from "react-bootstrap";
+import Router, { useRouter } from "next/router";
+import React from "react";
+import { Button, ButtonGroup, Container, Form } from "react-bootstrap";
 import styles from '../../styles/Home.module.css'
 
 
 export default function SearchPage({ }) {
+    const [seachText, setSearchText] = React.useState("");
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <p>Try to type something in order to search</p>
-                <Form.Control size="lg" placeholder="Search Something"></Form.Control>
+                <form className="" onSubmit={(e) => { e.preventDefault(); Router.push(`/search/${encodeURIComponent(seachText)}`) }}>
+                    <p>Arayabilmemiz için bişeyler yazmaya ne dersiniz?</p>
+                    <ButtonGroup >
+                        <Form.Control type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
+                        <Button variant="secondary" className="ps-2 pe-2" type="submit" >Ara</Button>
+                    </ButtonGroup>
+                </form>
             </Container>
         </main>
     );

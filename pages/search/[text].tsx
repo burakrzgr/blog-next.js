@@ -19,7 +19,7 @@ export default function SearchPageKeyword({ }) {
         getDocs(dbInstance).then((dat2) => {
             let list = dat2.docs.map(x => {
                 return { blogId: x.id, ...x.data() } as Blog});
-            setBlogs({load: true, blog: list.filter(x => {return x.header.includes(text as string) && x.writer.includes(text as string)})});
+            setBlogs({load: true, blog: list.filter(x => {return x.header.includes(text as string) || x.writer.username.includes(text as string)})});
             });
         //setBlogs({load:true,blog:[]})
     }, [text])
