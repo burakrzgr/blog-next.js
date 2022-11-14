@@ -42,5 +42,11 @@ export type CreateBlog = {
     header: string,
     content: string,
     anon: boolean,
-    writer: any
+    writer: CreateBlogWriter
+}
+
+export type CreateBlogWriter = {
+    username: string,
+    writerId: string,
+    image: string
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
 import { BlogWriter, CreateBlog, Gender } from "../types/blog";
 import { database } from '../config/firebase-config';
-import { addDoc, collection, doc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
+import { addDoc, arrayUnion, collection, doc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
 import { useAuth } from "../context/auth-context";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
@@ -13,10 +13,11 @@ const dbInstance = collection(database, 'blogs');
 export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
     const [info, setInfo] = useState<CreateBlog>(editBlog);
-    const [writer, setWriter] = useState<BlogWriter>({ id:'AnonWriterId',userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
+    //const [writer, setWriter] = useState<BlogWriter>({ id:'AnonWriterId',userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
     const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
 
 
+    /*
     useEffect(() => {
         if (user.uid) {
             let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
@@ -27,38 +28,46 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                         setWriter({ id:'AnonWriterId', userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
                 });
         }
-    }, []);
+    }, []); */
     useEffect(() => {
         setInfo(editBlog);
     }, [editBlog])
     
 
     const saveBlog = (data: CreateBlog) => {
-        const response = toast.promise(
-            addDoc(dbInstance,
+        toast.promise(
+            async () => {
+                const insRes = await addDoc(dbInstance,
                 {
                     content: data.content, header: data.header, writer:
                         data.anon ?
-                            { ["RxrvSA0ZawSjanoiUYPhUW6dCu93"]: { username: "Anon", image: "test", color: "000000" } } :
+                            { writerId: 'RZmsIEB2ea5zN3lNlsgw', image:'', username:'Anonymous' } :
                             data.writer
-                }),
+                });
+                const upRes = await updateDoc(doc(database, 'writers', user.writerId),
+                { blogs : arrayUnion(`blogs/${insRes.id}`)});
+                setUpdate({update:true,updateId:insRes.id});
+            },
             {
                 pending: 'Kayediliyor!',
                 success: 'Kaydedilme Başarılı!',
                 error: 'Hata ile karşılaşıldı!'
             });
-        response.then((res) => setUpdate({update:true,updateId:res.id}));
+        //response.then((res) => setUpdate({update:true,updateId:res.id}));
     }
 
     const updateBlog = (id:string,data: CreateBlog) => {
         toast.promise(
-            updateDoc(doc(database, 'blogs', id),
+            async () => {
+                const res = await updateDoc(doc(database, 'blogs', id),
                 {
                     content: data.content, header: data.header, writer:
                         data.anon ?
                             { ["RxrvSA0ZawSjanoiUYPhUW6dCu93"]: { username: "Anon", image: "test", color: "000000" } } :
                             data.writer
-                }),
+                
+                });
+            },
             {
                 pending: 'Güncelleniyor!',
                 success: 'Güncelleme Başarılı!',
@@ -85,10 +94,10 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                             onChange={(e) => setInfo({ ...info, anon: e.target.checked })} checked={info.anon} />}
                         {update.update ?
                             <Button variant="warning" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{ letterSpacing: "0.1rem" }}
-                                onClick={() => updateBlog(update.updateId,{ ...info, writer: { [writer.userId]: writer } })}
+                                onClick={() => updateBlog(update.updateId,{ ...info, writer: { writerId: user.writerId, image:user.image, username:user.username } })}
                             >Güncelle</Button> :
                             <Button variant="danger" size="lg" className="ms-5 ps-4 pe-4 btn-lg fw-bold" style={{ letterSpacing: "0.1rem" }}
-                                onClick={() => saveBlog({ ...info, writer: { [writer.userId]: writer } })}>Yayınla</Button>
+                                onClick={() => saveBlog({ ...info, writer: { writerId: user.writerId, image:user.image, username:user.username } })}>Yayınla</Button>
                         }
                     </Stack>
                 </Card.Footer>
