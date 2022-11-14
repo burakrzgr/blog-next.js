@@ -13,7 +13,7 @@ export default function SearchPage({ }) {
                     <p>Arayabilmemiz için bişeyler yazmaya ne dersiniz?</p>
                     <ButtonGroup className="w-100">
                         <Form.Control type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
-                        <Button variant="secondary" className="ps-4 pe-4" size="lgsearch" type="submit" >Ara</Button>
+                        <Button variant="secondary" className="ps-4 pe-4" size="lg" type="submit" >Ara</Button>
                     </ButtonGroup>
                 </form>
             </Container>
