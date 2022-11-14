@@ -1,16 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { Gender } from '../types/blog';
 
-
-const nnoPhoto = [{
-    backgroundImage: "url('/img/noprofile-female.jpg')"
-},
-{
-    backgroundImage: "url('/img/noprofile-male.png')"
-}
-];
-
-
 type StringMap = {
     [key: string]: any;
   };
@@ -18,7 +8,7 @@ type StringMap = {
 const noPhoto: StringMap = {
     "Male" : {backgroundImage: "url('/img/noprofile-male.png')"},
     "Female" : {backgroundImage: "url('/img/noprofile-female.jpg')"},
-    "Non" :{backgroundImage: "url('/img/noprofile-male.png')"}
+    "Non" :{backgroundImage: "url('/img/noprofile-genderless.jpg')"}
 };
 
 export default function ProfilePhotoDisplay({ link,gender }: { link: string,gender:Gender }) {
