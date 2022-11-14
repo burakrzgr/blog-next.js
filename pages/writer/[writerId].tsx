@@ -6,12 +6,12 @@ import ProfileCard from "../../components/profile-card";
 import ProfileWriter from "../../components/profile-writer";
 import { database } from "../../config/firebase-config";
 import styles from '../../styles/Home.module.css'
-import { BlogWriter } from "../../types/blog";
+import { BlogWriter, Gender } from "../../types/blog";
 
 
 
 export default function WriterInfo({ }) {
-    const [writer, setWriter] = useState<BlogWriter>({ id:'', userId: '', color: '5600F2', image: '', username: 'Loading', desc: '',blogs:undefined });
+    const [writer, setWriter] = useState<BlogWriter>({ id:'', userId: '', color: '5600F2', image: '', username: 'Loading', desc: '',blogs:undefined,gender:Gender.Non });
     const router = useRouter();
     const { writerId } = router.query;
     const [key, setKey] = useState('blogs');
