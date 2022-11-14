@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Badge, Button, Form, Stack } from "react-bootstrap";
 import { database } from "../config/firebase-config";
 import { useAuth } from "../context/auth-context";
-import { BlogWriter } from "../types/blog";
+import { BlogWriter, Gender } from "../types/blog";
 import FollowerAction from "./follower-action";
 import { InterestDisplay } from "./interest-display";
 import ProfilePhotoDisplay from "./profile-photo-display";
@@ -30,7 +30,7 @@ export default function ProfileCard ({writer}:{writer:BlogWriter}) {
   return (
     <Stack direction="vertical" gap={3}>
         <div>
-            <ProfilePhotoDisplay link={writer.image}></ProfilePhotoDisplay>
+            <ProfilePhotoDisplay link={writer.image} gender={writer.gender??Gender.Non}></ProfilePhotoDisplay>
         </div>
         <div>
             <div className="text-end">

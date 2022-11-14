@@ -7,7 +7,7 @@ import { InterestDisplay } from '../components/interest-display';
 import ProfilePhotoDisplay from '../components/profile-photo-display';
 import { database } from '../config/firebase-config';
 import styles from '../styles/Home.module.css'
-import { BlogWriter } from '../types/blog';
+import { BlogWriter, Gender } from '../types/blog';
 
 
 const dbInstance = collection(database, 'writers');
@@ -31,7 +31,7 @@ export default function Writers ({}) {
             {writers.writers.map((x,k) => {return (<div key={k}>
                     <Row className='border myborder m-2 p-2'>
                         <Col sm={12} lg={3}>
-                            <ProfilePhotoDisplay link={x.image} />
+                            <ProfilePhotoDisplay link={x.image} gender={x.gender??Gender.Non} />
                         </Col>
                         <Col sm={12} lg={7} >
                             <Row><h3>{x.username}</h3></Row>
