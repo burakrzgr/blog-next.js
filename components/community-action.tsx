@@ -26,7 +26,7 @@ export default function CommunityAction({ blogId, info }: { blogId: string, info
                 <Button variant="danger" size="lg" className="me-2 ms-5" onClick={() => setCommenting(!commenting)}>
                     <AiOutlineComment /><span className="m-0 ms-1">{commenting ? "Neyse Vazgeçtim" : "Yorum Yaz"}</span>
                 </Button>
-                <Button variant="secondary" size="lg" className="me-2 ms-auto" ><AiOutlineMore /></Button>
+                <Button variant="secondary" size="lg" className="me-2 ps-1 pe-1 ms-auto" ><AiOutlineMore /></Button>
             </Stack>
             <div>{commenting ?
                 <div style={{ display: "table", width: "100%" }} className="mt-4">

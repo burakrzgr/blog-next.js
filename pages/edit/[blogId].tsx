@@ -9,7 +9,7 @@ import { CreateBlog } from "../../types/blog";
 
 
 export default function EditBlog({ }) {
-    const [blog, setBlog] = useState<CreateBlog>({ blogId: '', content: '', header: '', writer: {}, anon: false });
+    const [blog, setBlog] = useState<CreateBlog>({ blogId: '', content: '', header: '', writer: {image:'',username:'',writerId:''}, anon: false });
     const router = useRouter();
     const { blogId } = router.query;
 
@@ -25,7 +25,7 @@ export default function EditBlog({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <NewBlog editBlog={{ blogId: blogId as string, header: blog.header, content: blog.content, anon: false, writer: {} }} />
+                <NewBlog editBlog={{ ...blog, blogId : blogId as string ,anon : false }} />
             </Container>
         </main>
     );
