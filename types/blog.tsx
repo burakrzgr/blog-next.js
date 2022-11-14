@@ -1,7 +1,7 @@
 export type Blog = {
     blogId: string,
     header: string,
-    writer: any,
+    writer: CreateBlogWriter,
     content: string,
     community: CommunityInfo
 }

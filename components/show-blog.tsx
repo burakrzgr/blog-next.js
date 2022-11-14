@@ -21,9 +21,9 @@ export default function ShowBlog({blog}:{blog:Blog}) {
                         <Card.Title className="mb-2 mt-2"><h3>{blog.header}</h3></Card.Title>
                         <Stack direction="vertical" className="ms-auto p-0 m-0">
                             <p className="text-muted ms-auto p-0 m-0">Yazar</p>    
-                            <p className="text-secondary ms-auto p-0 m-0" onClick={() => go(Object.keys(blog.writer)[0])}>{Object.values<BlogWriter>(blog.writer)[0]?.username??"[Anon]"}</p>
+                            <p className="text-secondary ms-auto p-0 m-0" role="button" onClick={() => go(blog.writer.writerId)}>{blog.writer.username??"[Anon]"}</p>
                         </Stack>
-                        {Object.keys(blog.writer)[0] === user.uid ?
+                        {blog.writer.writerId === user.writerId ?
                             <Button variant="warning" className="ms-2 m-0 p-1 ps-2 pe-2 h-100" onClick={() => Router.push(`/edit/${blog.blogId}`)}>
                                 <AiOutlineEdit></AiOutlineEdit>
                             </Button>:
