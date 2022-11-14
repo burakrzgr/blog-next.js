@@ -13,22 +13,8 @@ const dbInstance = collection(database, 'blogs');
 export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
     const [info, setInfo] = useState<CreateBlog>(editBlog);
-    //const [writer, setWriter] = useState<BlogWriter>({ id:'AnonWriterId',userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
     const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
 
-
-    /*
-    useEffect(() => {
-        if (user.uid) {
-            let q = query(collection(database, 'writers'), where("userId", '==', user.uid), limit(1));
-            getDocs(q)
-                .then((data) => {
-                    data.docs.length > 0 ?
-                        setWriter(data.docs[0].data() as BlogWriter) :
-                        setWriter({ id:'AnonWriterId', userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
-                });
-        }
-    }, []); */
     useEffect(() => {
         setInfo(editBlog);
     }, [editBlog])
@@ -53,7 +39,6 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                 success: 'Kaydedilme Başarılı!',
                 error: 'Hata ile karşılaşıldı!'
             });
-        //response.then((res) => setUpdate({update:true,updateId:res.id}));
     }
 
     const updateBlog = (id:string,data: CreateBlog) => {
