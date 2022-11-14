@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 
 const noPhoto = {
-    backgroundImage: "url('/img/no-profile-photo.png')"
+    backgroundImage: "url('/img/noprofile-female.jpg')"
 }
 
 export default function ProfilePhotoDisplay({ link }: { link: string }) {
