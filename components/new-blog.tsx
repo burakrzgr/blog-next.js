@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
 import { BlogWriter, CreateBlog, Gender } from "../types/blog";
 import { database } from '../config/firebase-config';
-import { addDoc, arrayUnion, collection, doc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
+import { addDoc, arrayUnion, collection, doc, DocumentReference, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
 import { useAuth } from "../context/auth-context";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
@@ -30,8 +30,8 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                             { writerId: 'RZmsIEB2ea5zN3lNlsgw', image:'', username:'Anonymous' } :
                             data.writer
                 });
-                const upRes = await updateDoc(doc(database, 'writers', user.writerId),
-                { blogs : arrayUnion(`blogs/${insRes.id}`)});
+                await updateDoc(doc(database, 'writers', user.writerId),
+                { blogs : arrayUnion(doc(database,`/blogs/${insRes.id}`))});
                 setUpdate({update:true,updateId:insRes.id});
             },
             {
@@ -48,7 +48,7 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                 {
                     content: data.content, header: data.header, writer:
                         data.anon ?
-                            { ["RxrvSA0ZawSjanoiUYPhUW6dCu93"]: { username: "Anon", image: "test", color: "000000" } } :
+                            { writerId: 'RZmsIEB2ea5zN3lNlsgw', image:'', username:'Anonymous' } :
                             data.writer
                 
                 });
