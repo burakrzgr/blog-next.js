@@ -18,3 +18,4 @@ export default function ProfilePhotoDisplay({ link }: { link: string }) {
         </div>
     );
 }
+

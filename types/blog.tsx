@@ -15,8 +15,15 @@ export type BlogWriter = {
     color:string,
     blogs?:string[],
     interests?:string,
-    desc:string
+    desc:string,
+    gender:Gender
 }
+
+export enum Gender {
+    Male,
+    Female,
+    Non,
+} 
 
 export type CommunityInfo = {
     likes: number,
