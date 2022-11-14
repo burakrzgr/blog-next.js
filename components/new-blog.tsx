@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
-import { BlogWriter, CreateBlog } from "../types/blog";
+import { BlogWriter, CreateBlog, Gender } from "../types/blog";
 import { database } from '../config/firebase-config';
 import { addDoc, collection, doc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
 import { useAuth } from "../context/auth-context";
@@ -13,7 +13,7 @@ const dbInstance = collection(database, 'blogs');
 export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
     const { user } = useAuth();
     const [info, setInfo] = useState<CreateBlog>(editBlog);
-    const [writer, setWriter] = useState<BlogWriter>({ id:'AnonWriterId',userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:''});
+    const [writer, setWriter] = useState<BlogWriter>({ id:'AnonWriterId',userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
     const [update, setUpdate] = useState({update:editBlog.blogId !== undefined,updateId:editBlog.blogId??''});
 
 
@@ -24,7 +24,7 @@ export default function NewBlog({editBlog}:{editBlog:CreateBlog}) {
                 .then((data) => {
                     data.docs.length > 0 ?
                         setWriter(data.docs[0].data() as BlogWriter) :
-                        setWriter({ id:'AnonWriterId', userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:''});
+                        setWriter({ id:'AnonWriterId', userId: 'RxrvSA0ZawSjanoiUYPhUW6dCu93', username: "Anon", image: "test", color: "000000",blogs:[],desc:'',gender:Gender.Non});
                 });
         }
     }, []);
