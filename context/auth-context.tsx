@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useState, useRef, useEffect } from "react";
 import { auth } from "../config/firebase-config";
+import { Gender } from "../types/blog";
 import {updateUser,getWriter} from "../utils/updateUser";
 
 
@@ -29,7 +30,7 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
     const [loading, setLoading] = useState(false);
     const userRef = useRef();
 
-    function signup(email: string, pasword: string, username:string) {
+    function signup(email: string, pasword: string, username:string, gender:Gender) {
         return createUserWithEmailAndPassword(auth, email, pasword).then((user) => {
             updateUser(user.user,{
               username: username,
@@ -37,7 +38,8 @@ export function AuthProvider({ children }: { children: JSX.Element })  {
               desc:'',
               image:'',
               interests:'',
-              blogs:[]
+              blogs:[],
+              gender:(Gender[gender])
             });
         });
     }    

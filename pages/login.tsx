@@ -1,9 +1,10 @@
 import { FirebaseError } from 'firebase/app';
 import Router from 'next/router';
 import { useState } from 'react';
-import { Alert, Button, Card, Container, Form, Stack } from 'react-bootstrap';
+import { Alert, Button, ButtonGroup, Card, Container, Form, Stack, ToggleButton } from 'react-bootstrap';
 import { useAuth } from '../context/auth-context';
 import styles from '../styles/Home.module.css'
+import { Gender } from '../types/blog';
 
 type StringMap = {
     [key: string]: string;
@@ -25,6 +26,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     const [username, setUsername] = useState("");
+    const [gender, setGender] = useState<Gender>(Gender.Non);
     const [error,setError] = useState("");
 
     async function submitHandler() {
@@ -46,7 +48,7 @@ export default function Login() {
         }
         else {
             try{
-                await signup(email, password,username);
+                await signup(email, password,username,gender);
                 redirect = true;
             }
             catch(err){
@@ -88,6 +90,38 @@ export default function Login() {
                                 <Form.Group>
                                     <Form.Label>Şifre Tekrarı</Form.Label>
                                     <Form.Control type='password' onChange={(e) => setPasswordAgain(e.target.value)} value={passwordAgain}></Form.Control>
+                                </Form.Group> : <></>
+                            }
+                            {!isLogginIn ?
+                                <Form.Group>
+                                    <Form.Label>Cinsiyet</Form.Label>
+                                    <br />
+                                    <ButtonGroup className="mb-2 w-100">
+                                        <ToggleButton
+                                            type="radio"
+                                            variant="outline-secondary"
+                                            name="radio"
+                                            value='Male'
+                                            checked={Gender.Male === gender}
+                                            onClick={(e) => setGender(Gender.Male)}
+                                        >Erkek</ToggleButton>
+                                        <ToggleButton
+                                            type="radio"
+                                            variant="outline-secondary"
+                                            name="radio"
+                                            value='Female'
+                                            checked={Gender.Female === gender}
+                                            onClick={(e) => setGender(Gender.Female)}
+                                        >Kadın</ToggleButton>
+                                         <ToggleButton
+                                            type="radio"
+                                            variant="outline-secondary"
+                                            name="radio"
+                                            value='Non'
+                                            checked={Gender.Non === gender}
+                                            onClick={(e) => setGender(Gender.Non)}
+                                        >Belirtmicem</ToggleButton>
+                                    </ButtonGroup>
                                 </Form.Group> : <></>
                             }
                         </Stack>

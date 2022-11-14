@@ -9,7 +9,8 @@ type updateUserType ={
     image:string,
     userId:string,
     interests:string,
-    blogs:string[]
+    blogs:string[],
+    gender:string
 }
 
 const dbInstance = collection(database, 'writers');
