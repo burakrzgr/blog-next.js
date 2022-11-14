@@ -12,7 +12,7 @@ export default function SearchPage({ }) {
                 <form className="w-100" onSubmit={(e) => { e.preventDefault(); Router.push(`/search/${encodeURIComponent(seachText)}`) }}>
                     <p>Arayabilmemiz için bişeyler yazmaya ne dersiniz?</p>
                     <ButtonGroup className="w-100">
-                        <Form.Control type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
+                        <Form.Control autoFocus type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
                         <Button variant="secondary" className="ps-4 pe-4" size="lg" type="submit" >Ara</Button>
                     </ButtonGroup>
                 </form>
