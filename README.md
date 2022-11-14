@@ -36,5 +36,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Deploy on Firebase
 
 We already deployed to firebase. As a test project you can view and give us feedback.
+
 Check out example project. (https://myblogapp-3fd57.web.app)
+
 Dont forget that project nowhere near to be considered complete project. And also a lot of feature are really prone to changes.
+
