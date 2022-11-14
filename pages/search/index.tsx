@@ -9,11 +9,11 @@ export default function SearchPage({ }) {
     return (
         <main className={styles.main} >
             <Container className={styles.container}>
-                <form className="" onSubmit={(e) => { e.preventDefault(); Router.push(`/search/${encodeURIComponent(seachText)}`) }}>
+                <form className="w-100" onSubmit={(e) => { e.preventDefault(); Router.push(`/search/${encodeURIComponent(seachText)}`) }}>
                     <p>Arayabilmemiz için bişeyler yazmaya ne dersiniz?</p>
-                    <ButtonGroup >
+                    <ButtonGroup className="w-100">
                         <Form.Control type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
-                        <Button variant="secondary" className="ps-2 pe-2" type="submit" >Ara</Button>
+                        <Button variant="secondary" className="ps-4 pe-4" size="lgsearch" type="submit" >Ara</Button>
                     </ButtonGroup>
                 </form>
             </Container>
