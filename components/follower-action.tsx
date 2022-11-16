@@ -41,8 +41,16 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
         {<div className="ms-4 link-info" role="button">{followInfo.follower} kişiyi takipte</div>}
         {followInfo.youFollow != undefined?
             (followInfo.youFollow?
-                <Button size="sm" variant="danger" className="ms-auto" role="button" onClick={() => unfollowUser(writerUserId,user.writerId)}>Takipten Çık</Button>:
-                <Button size="sm" variant="danger" className="ms-auto" role="button" onClick={() => followUser(writerUserId,user.writerId)}>Takibe Al</Button>
+                <Button size="sm" variant="danger" className="ms-auto" role="button" onClick={() => 
+                    {
+                        unfollowUser(writerUserId,user.writerId);
+                        setFollowInfo({...followInfo,youFollow:false});
+                    }}>Takipten Çık</Button>:
+                <Button size="sm" variant="danger" className="ms-auto" role="button" onClick={() => 
+                    {
+                        followUser(writerUserId,user.writerId);
+                        setFollowInfo({...followInfo,youFollow:true});
+                    }}>Takibe Al</Button>
             ):
             <></>}
     </Stack>
