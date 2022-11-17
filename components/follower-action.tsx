@@ -9,7 +9,7 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
     const { user } = useAuth();
     const [followInfo, setFollowInfo] = useState<{follower:number,followed:number,youFollow?:boolean}>({follower:0,followed:0,youFollow:undefined});
     
- 
+
     useEffect(() => { 
         async function findFollower(column:string) {
             let q = query(collection(database, 'favs'), where(column, '==', writerUserId));
@@ -26,8 +26,6 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
             else return false;
         }
         if(user.writerId && writerUserId){
-           
-
             (async () => {
                 let follower = await findFollower('follower');
                 let followed = await findFollower('followed');
