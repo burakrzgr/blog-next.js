@@ -9,31 +9,33 @@ export default function FollowerAction ({writerUserId}:{writerUserId:string}) {
     const { user } = useAuth();
     const [followInfo, setFollowInfo] = useState<{follower:number,followed:number,youFollow?:boolean}>({follower:0,followed:0,youFollow:undefined});
     
-    async function findFollower(column:string) {
-        let q = query(collection(database, 'favs'), where(column, '==', writerUserId));
-        const snapshot = getCountFromServer(q);
-        return (await snapshot).data().count;
-    }
-    
-    async function findIfYouFollow() {
-        if (user.writerId) {
-            let q = query(collection(database, 'favs'), where('followed', '==', writerUserId), where('follower', '==', user.writerId));
+ 
+    useEffect(() => { 
+        async function findFollower(column:string) {
+            let q = query(collection(database, 'favs'), where(column, '==', writerUserId));
             const snapshot = getCountFromServer(q);
-            return (await snapshot).data().count > 0;
+            return (await snapshot).data().count;
         }
-        else return false;
-    }
-    
-    
-    useEffect(() => {
-        (async () => {
-            let follower = await findFollower('follower');
-            let followed = await findFollower('followed');
-            let youFollow = user.writerId !== writerUserId ? await findIfYouFollow() : undefined;
-            setFollowInfo({ follower, followed, youFollow });
-        })();
+        
+        async function findIfYouFollow() {
+            if (user.writerId) {
+                let q = query(collection(database, 'favs'), where('followed', '==', writerUserId), where('follower', '==', user.writerId));
+                const snapshot = getCountFromServer(q);
+                return (await snapshot).data().count > 0;
+            }
+            else return false;
+        }
+        if(user.writerId && writerUserId){
+           
 
-    }, [writerUserId])
+            (async () => {
+                let follower = await findFollower('follower');
+                let followed = await findFollower('followed');
+                let youFollow = user.writerId !== writerUserId ? await findIfYouFollow() : undefined;
+                setFollowInfo({ follower, followed, youFollow });
+            })();
+        }
+    }, [user.writerId, writerUserId])
 
     return (
     <Stack direction="horizontal" style={{minHeight:"6rem"}}>
