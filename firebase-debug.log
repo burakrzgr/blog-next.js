@@ -1,0 +1,30 @@
+[debug] [2022-11-17T21:36:13.569Z] ----------------------------------------------------------------------
+[debug] [2022-11-17T21:36:13.571Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\burak\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-11-17T21:36:13.571Z] CLI Version:   11.16.0
+[debug] [2022-11-17T21:36:13.572Z] Platform:      win32
+[debug] [2022-11-17T21:36:13.572Z] Node Version:  v16.14.0
+[debug] [2022-11-17T21:36:13.573Z] Time:          Fri Nov 18 2022 00:36:13 GMT+0300 (GMT+03:00)
+[debug] [2022-11-17T21:36:13.573Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-17T21:36:13.630Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-17T21:36:13.631Z] > authorizing via signed-in user (burakrzgr@gmail.com)
+[debug] [2022-11-17T21:36:13.631Z] [iam] checking project myblogapp-3fd57 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-17T21:36:13.632Z] > refreshing access token with scopes: []
+[debug] [2022-11-17T21:36:13.634Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-17T21:36:13.634Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-17T21:36:13.859Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-11-17T21:36:13.859Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-17T21:36:13.866Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/myblogapp-3fd57:testIamPermissions [none]
+[debug] [2022-11-17T21:36:13.866Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/myblogapp-3fd57:testIamPermissions x-goog-quota-user=projects/myblogapp-3fd57
+[debug] [2022-11-17T21:36:13.866Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myblogapp-3fd57:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-17T21:36:14.918Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/myblogapp-3fd57:testIamPermissions 200
+[debug] [2022-11-17T21:36:14.918Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myblogapp-3fd57:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-17T21:36:14.919Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/myblogapp-3fd57 [none]
+[debug] [2022-11-17T21:36:15.439Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/myblogapp-3fd57 200
+[debug] [2022-11-17T21:36:15.439Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/myblogapp-3fd57 {"projectId":"myblogapp-3fd57","projectNumber":"895414192254","displayName":"MyBlogApp","name":"projects/myblogapp-3fd57","resources":{"hostingSite":"myblogapp-3fd57"},"state":"ACTIVE","etag":"1_ac76b760-849b-4624-ad69-5f67be16f09d"}
+[info] 
+[info] === Deploying to 'myblogapp-3fd57'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-11-17T21:36:15.444Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myblogapp-3fd57/versions [none]
+[debug] [2022-11-17T21:36:15.444Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myblogapp-3fd57/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
