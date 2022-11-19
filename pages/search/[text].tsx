@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Router, { useRouter } from "next/router";
-import { Button, ButtonGroup, Container, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Container, Form, InputGroup } from "react-bootstrap";
 import ShowBlogList, {ShowBlogProps} from "../../components/show-blog-list";
 import styles from '../../styles/Home.module.css';
 import { collection, getDocs, query, startAt, where } from "firebase/firestore";
@@ -27,10 +27,10 @@ export default function SearchPageKeyword({ }) {
         <main className={styles.main} >
             <Container className={styles.container}>
                 <form className="w-100" onSubmit={(e) => { e.preventDefault(); Router.push(`/search/${encodeURIComponent(seachText)}`) }}>              
-                    <ButtonGroup className="w-100">
+                    <InputGroup className="w-100">
                         <Form.Control autoFocus type="text" size="lg" placeholder="Blogları yada yazarları arayın..." value={seachText} onChange={e => setSearchText(e.target.value)}></Form.Control>
                         <Button variant="secondary" className="ps-4 pe-4" size="lg" type="submit" >Ara</Button>
-                    </ButtonGroup>
+                    </InputGroup>
                 </form>
                 <br />
                 <h5>{"Arama metini \""}{text}{"\" için "}{blogs?.blog?.length??0} sonuç bulundu.</h5>
