@@ -19,7 +19,7 @@ interface AuthProviderInterface {
   }
 
 
-const AuthContext = createContext<AuthProviderInterface>({login:() => {},logout:() => {},signup:() => {},user:null});;
+const AuthContext = createContext<AuthProviderInterface>({login:() => {},logout:() => {},signup:() => {},user:null});
 
 export function useAuth() {
     return useContext(AuthContext);
